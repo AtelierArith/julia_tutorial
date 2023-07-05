@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- META -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Satoshi Terasaki">
+  <title>julia_tutorial</title>
+
+  <link rel="icon" type="image/png"  href="/julia_tutorial/assets/favicon.ico">
+
+  <!-- CSS -->
+  
+  
+  <link rel="stylesheet" href="/julia_tutorial/css/bootstrap.min.css">
+  <style>.bg-primary {
+  background-color: #3f6388 !important;
+}
+
+a {
+  color: #2669DD;
+}
+
+a:hover {
+  color: teal;
+}
+
+.section-bg-color {
+  background-color: #f6f8fa;
+}
+
+footer a {
+  color: cornflowerblue;
+}
+
+
+header {
+  margin-top: 55px !important;
+}
+
+
+
+.jumbotron {
+  background-image: url("assets/diagonal-lines.svg");
+  background-repeat: repeat;
+}
+
+
+/* CODE ADJUSTMENTS */
+
+pre code.hljs {
+  border-radius: 10px;
+}
+
+pre code.hljs.plaintext {
+  margin-left: 15px;
+}
+</style>
+  <link rel="stylesheet" href="/julia_tutorial/css/custom.css">
+
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+<body id="page-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+  <div class="container">
+    <span class="navbar-brand">
+      
+        <img src="/julia_tutorial/assets/favicon.png" class="img-fluid" style="height:         25px;
+padding-right:  10px;
+" alt="Logo"/>
+      
+      <a href="#page-top">julia_tutorial</a>
+      
+    </span>
+    <input type="checkbox" id="navbar-toggler-cbox" class="d-none" />
+    <label for="navbar-toggler-cbox" class="navbar-toggler" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </label>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="#slideshow">Slideshow</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="#関連ページ">関連ページ</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <header class="text-white text-center">
+  
+    <div class="jumbotron jumbotron-fluid container-fluid bg-primary">
+  
+    <h1>julia_tutorial</h1>
+    <div class="lead">数学と物理におけるJuliaの活用</div>
+    
+      <a class="github-button" href="https://github.com/AtelierArith/julia_tutorial" data-size="large" aria-label="View julia_tutorial on GitHub">View on GitHub</a>
+    
+    
+      <a class="github-button" href="https://github.com/AtelierArith/julia_tutorial" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star julia_tutorial on GitHub">Star</a>
+    
+  </div>
+</header>
+
+  <!-- Content appended here -->
+<div class="franklin-content"><section id="about" class="scrollspy">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <h2>About this Page</h2></p>
+<div class="lead"><a href="https://akio-tomiya.github.io/julia_imi_workshop2023/">数学と物理におけるJuliaの活用</a> にて行われるチュートリアル講演第一部の資料集である</div>
+<p>      </div>
+    </div>
+  </div>
+</section>
+<section id="slideshow" class="scrollspy section-bg-color">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <h2>Slideshow</h2></p>
+<ul>
+<li><p><a href="slideshow/getting_started/build">予習資料</a></p>
+</li>
+<li><p><a href="slideshow/tutorial_part1/build">講演資料</a></p>
+</li>
+<li><p><a href="slideshow/why_i_use_julia/build">Why I use Julia</a></p>
+</li>
+<li><p><a href="slideshow/software_development/build">ソフトウェア開発の課題</a></p>
+</li>
+</ul>
+<p>      </div>
+    </div>
+  </div>
+</section>
+<section id="関連ページ" class="scrollspy">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <h2>関連ページ</h2></p>
+<ul>
+<li><p><a href="https://akio-tomiya.github.io/julia_in_physics/">Julia in Physics 2021 Online</a></p>
+</li>
+<li><p><a href="https://www.imi.kyushu-u.ac.jp/">九州大学マス・フォア・インダストリ研究所</a></p>
+</li>
+</ul>
+<p>      </div>
+    </div>
+  </div>
+</section>
+<footer class="py-5 bg-dark">
+  <div class="container">
+    <p class="m-0 text-center text-white">&copy; Satoshi Terasaki. Website powered by <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a>, <a href="https://github.com/tlienart/PkgPage.jl">PkgPage.jl</a> and the <a href="https://julialang.org">Julia</a> programming language.</p>
+  </div>
+</footer>
+</div><!-- CONTENT ENDS HERE -->
+  
+  
+  <script src="/julia_tutorial/libs/simple-scrollspy.min.js"></script>
+  <script>
+  window.onload = function () {
+    scrollSpy('#navbarResponsive', {
+      sectionClass: '.scrollspy',
+      menuActiveTarget: '.nav-link',
+      offset: 100
+    })
+  }
+  </script>
+  </body>
+</html>
