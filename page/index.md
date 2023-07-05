@@ -18,3 +18,5 @@
 
 - [Julia in Physics 2021 Online](https://akio-tomiya.github.io/julia_in_physics/)
 - [九州大学マス・フォア・インダストリ研究所](https://www.imi.kyushu-u.ac.jp/)
+
+\end{section}
