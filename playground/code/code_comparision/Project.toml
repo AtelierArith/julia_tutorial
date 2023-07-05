@@ -1,0 +1,4 @@
+[deps]
+Dash = "1b08a953-4be3-4667-9a23-3db579824955"
+DashBootstrapComponents = "1b08a953-4be3-4667-9a23-fa6d05876a1e"
+IOCapture = "b5f81e59-6552-4d32-b1f0-c071b021bf89"
