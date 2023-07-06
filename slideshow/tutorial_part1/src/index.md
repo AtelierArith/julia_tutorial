@@ -898,6 +898,23 @@ report_opt(main3, (Int,))
 
 ---
 
+# 「型安定・型不安定の話 (2)」の続き
+
+- [Type annotation make JIT compile faster?](https://discourse.julialang.org/t/type-annotation-make-jit-compile-faster/31906)
+
+上記の質問に対する Stefan Karpinski さんの回答:
+
+> No. You do not generally need type annotations on function arguments (except to control behavior via dispatch), nor do you need type annotations in local scope. The place that type annotations are essential for performance is on locations: the fields of structs and the element types of arrays and other data structures.
+
+要するに
+
+- 構造体のフィールド
+- 配列をはじめとするデータ構造に関しての要素型
+
+
+
+---
+
 # JET.jl を用いた潜在的なエラーの発見 (1)
 
 ```julia
@@ -1076,6 +1093,8 @@ BenchmarkTools.Trial: 10000 samples with 1 evaluation.
 # Replay.jl
 
 - REPL での作業を自動化する．
+- [ドキュメントはこちら](https://atelierarith.github.io/Replay.jl/dev/)
+  - `hyrodium` さんありがとうございます
 
 ---
 
@@ -1131,6 +1150,23 @@ $ docker run --rm -it -v $PWD:/work -w /work \
 - [Lévy C curve](https://atelierarith.github.io/julia_tutorial_pluto_materials/ifs_l%C3%A9vy.html)
 - [反復関数系](https://atelierarith.github.io/julia_tutorial_pluto_materials/ifs_revised.html)
 - [RandomLogos.jl](https://atelierarith.github.io/julia_tutorial_pluto_materials/random_logos.html)
+
+---
+
+# 豆知識
+
+ローカルにある自作パッケージを Pluto で動かす場合
+
+- `julia --project=@. -e 'using Pluto; Pluto.run()'` で当該パッケージをアクティベートした状態で Pluto を起動.
+- 下記のセルを追加
+
+```julia
+begin
+  Pkg.activate(Base.active_project())
+end
+```
+
+- 詳しいことは [Pluto's built-in package management](https://github.com/fonsp/Pluto.jl/wiki/%F0%9F%8E%81-Package-management) を読むと良い.
 
 ---
 
