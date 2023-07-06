@@ -4,9 +4,11 @@ instructions = [
     "using JET",
     "include(\"mylib.jl\");",
     "# 型不安定", 
-    "code_warntype(main1, (Int,))",
+    "report_opt(main1, (Int,))",
+    "@report_opt main1(10)",
     "# 型安定", 
-    "code_warntype(main3, (Int,))",
+    "report_opt(main3, (Int,))",
+    "@report_opt main3(10)",
 ]
 
 replay(instructions, use_ghostwriter=true)

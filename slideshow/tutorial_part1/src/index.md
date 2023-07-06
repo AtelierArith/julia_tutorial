@@ -38,7 +38,7 @@ println("更新日: $(Dates.now())") # hide
   - `(Did we mention it should be as fast as C?)`
 - 要するに
   - 高級言語のように使いやすく計算機の上で高速に動作する
-  - 素早く速いコードを書くことができる
+  - 速く動くコードを早くを書くことができる
 
 ---
 
@@ -67,7 +67,8 @@ println("更新日: $(Dates.now())") # hide
 
 - Juila 1.9 がリリース
   - TTFX 問題が改善される !!! 
-- Pluto.jl が使いやすくなった
+    - 可視化ツールの使用が捗る！
+
 - デバッグまわりのツールが増えてきた
 - 鈍器(褒め言葉)扱いの 実践Julia入門， Juliaプログラミング大全が登場してきた
 - いろんな本が今年は出版されるらしい
@@ -611,12 +612,14 @@ $ julia --project=@. table.jl 0
 
 # 試行錯誤の方法
 
-- `script.jl` を書く
-- `julia script.jl` を実行する
-- `script.jl` を更新する
-- `julia script.jl` を実行する
+```code
+script.jl を書く
+julia script.jl を実行する # (´・ω・｀) 😔
+script.jl を更新する
+julia script.jl を実行する # (´・ω・｀) 😔
+```
 
-JIT コンパイルが毎回走るので効率が悪い．コンパイル結果を使い回す運用が必要．
+JIT コンパイルが毎回走るので（人間にとって）効率が悪い．コンパイル結果を使い回す運用が必要．
 
 `mylib.jl` 内部に `main` 関数があるとする．
 
@@ -677,11 +680,33 @@ julia> @enter main()
 
 ---
 
-## 型安定・型不安定
+## 型安定・型不安定の話 (1)
 - Julia は JIT コンパイル方式で動作をする
   - Julia は関数の引数に渡された値の__型の情報__ を元にコンパイルをする．
   - 入力の型から出力の型が決定できれば型安定な実装となり効率の良いコードを生成することができる．
-  - 入力される値によって出力の型が変わると型不安定になる. 速度が求められる箇所では__型安定なコードを書くのが必須__
+  - 入力される値によって出力の型が変わると型不安定になる. 速度が求められる箇所では__型安定なコードを書くのが必須__です.
+
+- 型安定なコードを書くように意識すると
+  - 型システムに親しめるようになる
+- 型システムに親しめるようになる
+  - 型安定なコードを書くように意識する
+- 型システムについてはチュートリアル第二部で行います。（このスライドは第一部です）
+
+---
+
+## 型安定・型不安定の話 (2)
+
+- [What does "type-stable" mean?](https://docs.julialang.org/en/v1/manual/faq/#man-type-stability)
+
+- [Type annotation make JIT compile faster?](https://discourse.julialang.org/t/type-annotation-make-jit-compile-faster/31906)
+
+上記の質問に対する Stefan Karpinski さんの回答:
+
+> No. You do not generally need type annotations on function arguments (except to control behavior via dispatch), nor do you need type annotations in local scope. The place that type annotations are essential for performance is on locations: the fields of structs and the element types of arrays and other data structures.
+- 実際 [Argument-type declarations](https://docs.julialang.org/en/v1/manual/functions/#Argument-type-declarations) にあるように関数の引数に対して型アノテーションが必要な理由は `Dispatch`, `Correctness`, `Clarity` の３つであって，実行速度の理由で必要とするわけでない．
+- `@code_xxx` 系のマクロの説明は Stack Overflow での議論
+[`What is the difference between @code_native, @code_typed and @code_llvm in Julia?`](https://stackoverflow.com/questions/43453944/what-is-the-difference-between-code-native-code-typed-and-code-llvm-in-julia) の解説がわかりやすい．
+  
 
 ---
 
@@ -850,6 +875,29 @@ BenchmarkTools.Trial: 10000 samples with 1 evaluation.
 
 ---
 
+### 型不安定・型安定なコードの比較 (3)
+
+`code_warntype`, `JET.report_opt` などで検出する. 対応するマクロもある。
+
+```julia
+using JET
+
+# 色々警告が出る。REPL だと警告は赤色で表示される
+code_warntype(main1, (Int,))
+@code_warntype main1(10) # (InteractiveUtils.code_warntype(main1, (Base.typesof)(10)))
+report_opt(main1, (Int,))
+@report_opt main1(10) # JET.report_opt(main1, (Base.typesof)(10))
+```
+
+```julia
+code_warntype(main3, (Int,))
+@code_warntype main3(10)
+report_opt(main3, (Int,))
+@report_opt main3(10)
+```
+
+---
+
 # JET.jl を用いた潜在的なエラーの発見 (1)
 
 ```julia
@@ -962,35 +1010,21 @@ end
 
 ---
 
-# 豆知識 (1)
-
-- [What does "type-stable" mean?](https://docs.julialang.org/en/v1/manual/faq/#man-type-stability)
-
-- [Type annotation make JIT compile faster?](https://discourse.julialang.org/t/type-annotation-make-jit-compile-faster/31906)
-
-上記の質問に対する Stefan Karpinski さんの回答:
-
-> No. You do not generally need type annotations on function arguments (except to control behavior via dispatch), nor do you need type annotations in local scope. The place that type annotations are essential for performance is on locations: the fields of structs and the element types of arrays and other data structures.
-- 実際 [Argument-type declarations](https://docs.julialang.org/en/v1/manual/functions/#Argument-type-declarations) にあるように関数の引数に対して型アノテーションが必要な理由は `Dispatch`, `Correctness`, `Clarity` の３つであって，実行速度の理由で必要とするわけでない．
-- `@code_xxx` 系のマクロの説明は Stack Overflow での議論
-[`What is the difference between @code_native, @code_typed and @code_llvm in Julia?`](https://stackoverflow.com/questions/43453944/what-is-the-difference-between-code-native-code-typed-and-code-llvm-in-julia) の解説がわかりやすい．
-  
----
-
-# 豆知識 (2)
-
-`Julia高速化の常識･非常識 @ Bio”Pack”athon2022#12` の解説
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/D9V4m0mewoA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-
----
-
 # JET.jl 周り学習リソース(JuliaCon)
 
 | JET.jl の紹介 | レクチャー動画|
 |:---:|:---:|
 | <iframe width="560" height="315" src="https://www.youtube.com/embed/7eOiGc8wfE0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> | <iframe width="560" height="315" src="https://www.youtube.com/embed/wXRMwJdEjX4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+---
+
+---
+
+# 高速化周り学習リソース(JuliaCon)
+
+佐藤さんによる `Julia高速化の常識･非常識 @ Bio”Pack”athon2022#12` 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/D9V4m0mewoA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ---
 
