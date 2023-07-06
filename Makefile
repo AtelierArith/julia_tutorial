@@ -4,12 +4,6 @@ DOCKER_IMAGE=julia_tutorialjl
 
 all: web
 
-build:
-	-rm -f Manifest.toml docs/Manifest.toml
-	docker build -t ${DOCKER_IMAGE} . --build-arg NB_UID=`id -u`
-	docker-compose build
-	docker-compose run --rm shell julia --project=@. -e 'using Pkg; Pkg.instantiate()'
-
 # Excecute in docker container
 web: page
 	julia --project=slideshow -e 'import Pkg; Pkg.instantiate()'
