@@ -44,7 +44,7 @@ class: middle, center
 
 
 ```
-更新日: 2023-07-06T03:07:25.729
+更新日: 2023-07-07T03:30:55.417
 ```
 
 
@@ -354,6 +354,33 @@ julia>
 
 
 
+# Appendix: Julia 自体のアップデート
+
+
+  * [Julia v1.9.2 has been released](https://discourse.julialang.org/t/julia-v1-9-2-has-been-released/101229) というアナウンスが出ました．
+  * Juliaup 経由で入れていると次のような通知が出るはずです．
+
+
+```console
+$ julia
+The latest version of Julia in the `1.9` channel is 1.9.2+0.x64.apple.darwin14. You currently have `1.9.1+0.x64.apple.darwin14` installed. Run:
+
+  juliaup update
+
+to install Julia 1.9.2+0.x64.apple.darwin14 and update the `1.9` channel to that version.
+```
+
+
+  * [Julia’s Release Process](https://julialang.org/blog/2019/08/release-process/)
+
+
+---
+
+
+
+
+
+
 # Appendix: Juliaup 以外の選択肢
 
 
@@ -361,6 +388,7 @@ julia>
 
       * jill - Julia Installer 4 Linux - Light
   * [johnnychen94/jill.py](https://github.com/johnnychen94/jill.py)
+  * [Docker](https://www.docker.com/) を用いて `docker run -it --rm julia:1.9.1` のようにしてコンテナを起動する
 
 
 ---

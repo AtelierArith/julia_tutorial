@@ -44,7 +44,7 @@ class: middle, center
 
 
 ```
-更新日: 2023-07-06T03:07:20.513
+更新日: 2023-07-07T03:30:50.110
 ```
 
 
@@ -62,35 +62,6 @@ class: middle, center
 
 
 # Julia のインストール
-
-
----
-
-
-
-
-# Julia のインストール
-
-
-  * 要するに `julia` というコマンドが利用できれば良い．
-
-
-```julia
-$ julia
-               _
-   _       _ _(_)_     |  Documentation: https://docs.julialang.org
-  (_)     | (_) (_)    |
-   _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
-  | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 1.9.1 (2023-06-07)
- _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
-|__/                   |
-
-julia>
-```
-
-
-  * すでに使える人はスキップする
 
 
 
@@ -242,35 +213,24 @@ julia>
 
 
 
-# Julia を動かす (REPL)
+# Appendix: Julia 自体のアップデート
 
 
-`versioninfo()` を使うと詳細な情報を得ることができる．バグレポートなどに添付すると良い．
+  * [Julia v1.9.2 has been released](https://discourse.julialang.org/t/julia-v1-9-2-has-been-released/101229) というアナウンスが出ました．
+  * Juliaup 経由で入れていると次のような通知が出るはずです．
 
 
-```julia
+```console
 $ julia
-               _
-   _       _ _(_)_     |  Documentation: https://docs.julialang.org
-  (_)     | (_) (_)    |
-   _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
-  | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 1.9.1 (2023-06-07)
- _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
-|__/                   |
+The latest version of Julia in the `1.9` channel is 1.9.2+0.x64.apple.darwin14. You currently have `1.9.1+0.x64.apple.darwin14` installed. Run:
 
-julia> versioninfo()
-Julia Version 1.9.1
-Commit 147bdf428cd (2023-06-07 08:27 UTC)
-Platform Info:
-  OS: macOS (x86_64-apple-darwin22.4.0)
-  CPU: 16 × Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz
-  WORD_SIZE: 64
-  LIBM: libopenlibm
-  LLVM: libLLVM-14.0.6 (ORCJIT, skylake)
-  Threads: 1 on 16 virtual cores
-Environment:
+  juliaup update
+
+to install Julia 1.9.2+0.x64.apple.darwin14 and update the `1.9` channel to that version.
 ```
+
+
+  * [Julia’s Release Process](https://julialang.org/blog/2019/08/release-process/)
 
 
 ---
@@ -287,6 +247,7 @@ Environment:
 
       * jill - Julia Installer 4 Linux - Light
   * [johnnychen94/jill.py](https://github.com/johnnychen94/jill.py)
+  * [Docker](https://www.docker.com/) を用いて `docker run -it --rm julia:1.9.1` のようにしてコンテナを起動する
 
     </textarea>
 
