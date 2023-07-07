@@ -116,7 +116,8 @@ julia>
 - すでに使える人はスキップする
 
 ### 素直な方法
-  - Julia の公式サイトから入手 https://julialang.org/downloads/ 移動し[各自の環境に合わせて導入](https://julialang.org/downloads/platform/)
+
+- Julia の公式サイトから入手 https://julialang.org/downloads/ 移動し[各自の環境に合わせて導入](https://julialang.org/downloads/platform/)
 
 ---
 
@@ -199,11 +200,30 @@ julia>
 
 ---
 
+# Appendix: Julia 自体のアップデート
+
+- [Julia v1.9.2 has been released](https://discourse.julialang.org/t/julia-v1-9-2-has-been-released/101229) というアナウンスが出ました．
+- Juliaup 経由で入れていると次のような通知が出るはずです．
+
+```console
+$ julia
+The latest version of Julia in the `1.9` channel is 1.9.2+0.x64.apple.darwin14. You currently have `1.9.1+0.x64.apple.darwin14` installed. Run:
+
+  juliaup update
+
+to install Julia 1.9.2+0.x64.apple.darwin14 and update the `1.9` channel to that version.
+```
+
+- [Julia’s Release Process](https://julialang.org/blog/2019/08/release-process/) 
+
+---
+
 # Appendix: Juliaup 以外の選択肢
 
 - [abelsiqueira/jill](https://github.com/abelsiqueira/jill)
   - jill - Julia Installer 4 Linux - Light
 - [johnnychen94/jill.py](https://github.com/johnnychen94/jill.py)
+- [Docker](https://www.docker.com/) を用いて `docker run -it --rm julia:1.9.1` のようにしてコンテナを起動する
 
 ---
 
