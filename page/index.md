@@ -7,10 +7,13 @@
 
 \begin{section}{title="Slideshow", name="Slideshow"}
 
-- [予習資料](slideshow/getting_started/build)
-- [講演資料](slideshow/tutorial_part1/build)
-- [Why I use Julia](slideshow/why_i_use_julia/build)
-- [ソフトウェア開発の課題](slideshow/software_development/build)
+- 口頭発表資料
+  - [予習資料](slideshow/getting_started/build)
+  - [講演資料](slideshow/tutorial_part1/build)
+
+- 個人的な意見が強く出てしまった資料
+  - [Why I use Julia](slideshow/why_i_use_julia/build)
+  - [ソフトウェア開発の課題](slideshow/software_development/build)
 
 \end{section}
 
