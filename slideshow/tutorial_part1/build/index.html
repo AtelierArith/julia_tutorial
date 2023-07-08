@@ -44,7 +44,7 @@ class: middle, center
 
 
 ```
-更新日: 2023-07-08T15:44:59.109
+更新日: 2023-07-08T18:14:35.131
 ```
 
 
@@ -152,7 +152,7 @@ class: middle, center
 ## そこでチュートリアル講演です
 
 
-概要: ライトユースにも使いたい，けれどもそれで高速性を犠牲にしたくない。総合的に開発できるものにしたい。超初心者にも習得は容易でありながら，ハッカーの満足にも応えられるものがほしい。」そういった願いからプログラミング言語 Julia が誕生しました。直近では v1.9 がリリースされ，長年課題であったパッケージの読み込み時間の短縮など，開発体験の改善が行われました。さらに和書の入門書も充実してきており，学習を始めるには絶好のタイミングといえるでしょう。本チュートリアル講演では Julia の入門として
+概要: ライトユースにも使いたいけれどもそれで高速性を犠牲にしたくない。総合的に開発できるものにしたい。超初心者にも習得は容易でありながらハッカーの満足にも応えられるものがほしい。」そういった願いからプログラミング言語 Julia が誕生しました。直近では v1.9 がリリースされ長年課題であったパッケージの読み込み時間の短縮など開発体験の改善が行われました。さらに和書の入門書も充実してきており学習を始めるには絶好のタイミングといえるでしょう。本チュートリアル講演では Julia の入門として
 
 
 1. インストールと基本的な使い方 (<– このスライドの担当箇所)
@@ -160,7 +160,7 @@ class: middle, center
 3. スレッド並列の基礎
 
 
-3 つのトピックを解説します。この機会に Julia に入門し，新しい体験を始めてみませんか。
+3 つのトピックを解説します。この機会に Julia に入門し新しい体験を始めてみませんか。
 
 
 ---
@@ -388,6 +388,8 @@ to install Julia 1.9.2+0.x64.apple.darwin14 and update the `1.9` channel to that
 
       * jill - Julia Installer 4 Linux - Light
   * [johnnychen94/jill.py](https://github.com/johnnychen94/jill.py)
+
+      * `pip3 install jill && jill install`
   * [Docker](https://www.docker.com/) を用いて `docker run -it --rm julia:1.9.1` のようにしてコンテナを起動する
 
 
@@ -414,7 +416,7 @@ class: middle, center
 # なぜ REPL で動かすのか?
 
 
-もちろん，ファイルにコードを記述し次のように動かしても良い．
+もちろんファイルにコードを記述し次のように動かしても良い．
 
 
 ```console
@@ -423,7 +425,7 @@ $ julia script.jl
 
 
   * Julia は JIT コンパイルによって動作する言語である
-  * `julia script.jl` するごとにパッケージのロード，関数のコンパイルが行われるそのためのコストは無視できない
+  * `julia script.jl` するごとにパッケージのロード関数のコンパイルが行われるそのためのコストは無視できない
 
       * コンパイル結果を使い回し効率よく作業する必要がある
   * 試行錯誤時は REPL の上で作業をするのがよく行われる
@@ -776,7 +778,7 @@ julia> domath(3)
 
 
   * `export name` によってユーザが `name` を使うことができる.
-  * 便利である一方，「この関数はどこで定義しているのかぱっと見わからない」問題がある
+  * 便利である一方「この関数はどこで定義しているのかぱっと見わからない」問題がある
 
 
 ```julia
@@ -1082,10 +1084,11 @@ julia> @enter main()
 # JET.jl
 
 
-  * 潜在的なエラーや型不安定なコードの検知ができる．
+  * 型不安定なコードや潜在的なエラーを検知ができる．
 
       * 開発のモチベーションは [aviatesk/grad-thesis](https://github.com/aviatesk/grad-thesis) などから知ることができる
       * 日本語で読むことができる
+  * なんか Julia のライブラリ遅いなーって思ったら 型不安定なコードがあることを疑うと良い．
 
 
 ---
@@ -1134,6 +1137,19 @@ julia> @enter main()
 
 
   * 実際 [Argument-type declarations](https://docs.julialang.org/en/v1/manual/functions/#Argument-type-declarations) にあるように関数の引数に対して型アノテーションが必要な理由は `Dispatch`, `Correctness`, `Clarity` の３つであって，実行速度の理由で必要とするわけでない．
+
+
+---
+
+
+
+
+
+
+## 型安定・型不安定の話 (3)
+
+
+  * `@code_xxx` 系のマクロで Julia がどのようにコードを理解しているか観測ができる．
   * `@code_xxx` 系のマクロの説明は Stack Overflow での議論
 
 
@@ -1314,9 +1330,8 @@ using Random
 function main1(N=10)
     rng = MersenneTwister(0)
     s = 0.0
-    arr = [relu1(2rand(rng) - 1) for _ in 1:N]
+    arr = [relu1(2rand(rng) - 1) for _ in 1:N] # arr は Vector{Real} になる
     for y in arr
-        # s = s + y
         s += y
     end
     s
@@ -1328,9 +1343,8 @@ end
 function main3(N=10)
     rng = MersenneTwister(0)
     s = 0.0
-    arr = [relu3(2rand(rng) - 1) for _ in 1:N]
+    arr = [relu3(2rand(rng) - 1) for _ in 1:N] # arr は Vector{Float64} になる
     for y in arr
-        # s = s + y
         s += y
     end
     s
@@ -1431,11 +1445,357 @@ report_opt(main3, (Int,))
 要するに
 
 
-  * 構造体のフィールド
+  * 構造体のフィールド 
+
+      * パフォーマンスの観点からは (`Vector{Real}` ではなく `Vector{Float64}` とするのが良い)
   * 配列をはじめとするデータ構造に関しての要素型
 
 
 ---
+
+
+
+
+
+
+# 構造体: アフィン変換の例 (1)
+
+
+アフィン変換 $f(x) = Wx + b$ を考える
+
+
+```julia
+julia> struct Affine
+         W
+         b
+       end
+
+julia> (aff::Affine)(x) = aff.W * x + aff.b # Python での `def __call__` 相当
+
+julia> aff = Affine(rand(2,2), rand(2))
+Affine([0.05221655288726834 0.4531635136343529; 0.006660217186564732 0.32819491295200176], [0.16834154818251978, 0.6642250801631969])
+
+julia> aff(x)
+2-element Vector{Float64}:
+ 0.24022734713529842
+ 0.7082428857823445
+```
+
+
+動いてそう.
+
+
+---
+
+
+
+
+
+
+# 構造体: アフィン変換の例 (2)
+
+
+人間のからすると `W` は行列, `b` はベクトルということはわかるが，
+
+
+```julia
+julia> # 前のスライドからの続き
+julia> typeof(aff)
+Affine # フィールドの型情報が見えない
+
+julia> @code_warntype aff(x)
+MethodInstance for (::Affine)(::Symbolics.Arr{Num, 1})
+  from (aff::Affine)(x) @ Main REPL[2]:1
+Arguments
+  aff::Affine
+  x::Symbolics.Arr{Num, 1}
+Body::Any
+1 ─ %1 = Base.getproperty(aff, :W)::Any
+│   %2 = (%1 * x)::Any
+│   %3 = Base.getproperty(aff, :b)::Any
+│   %4 = (%2 + %3)::Any
+└──      return %4
+
+```
+
+
+フィールドの型情報が見えないので `Any` がいっぱい．(パフォーマンスの観点からよくない)
+
+
+---
+
+
+
+
+
+
+# 構造体: アフィン変換の例 (3)
+
+
+  * フィールドに型をつければいいんでしょ？
+  * 一旦 REPL を再起動して下記を動かす
+
+
+```julia
+julia> struct Affine
+           W::Matrix{Float64}
+           b::Vector{Float64}
+       end
+
+julia> (aff::Affine)(x) = aff.W * x + aff.b
+
+julia> aff = Affine(rand(2,2), rand(2))
+Affine([0.6711341109848074 0.24382214292980786; 0.6036132680677607 0.13610672620163822], [0.2609069141726297, 0.42855543143208474])
+
+julia> aff(rand(2))
+2-element Vector{Float64}:
+ 0.9884996898337165
+ 1.04891268376067
+```
+
+
+動いてそう
+
+
+---
+
+
+
+
+
+
+# 構造体: アフィン変換の例 (4)
+
+
+良さそうにみえる
+
+
+```julia
+julia> @code_warntype aff(rand(2))
+MethodInstance for (::Affine)(::Vector{Float64})
+  from (aff::Affine)(x) @ Main REPL[2]:1
+Arguments
+  aff::Affine
+  x::Vector{Float64}
+Body::Vector{Float64}
+1 ─ %1 = Base.getproperty(aff, :W)::Matrix{Float64}
+│   %2 = (%1 * x)::Vector{Float64}
+│   %3 = Base.getproperty(aff, :b)::Vector{Float64}
+│   %4 = (%2 + %3)::Vector{Float64}
+└──      return %4
+```
+
+
+---
+
+
+
+
+
+
+# 構造体: アフィン変換の例 (5)
+
+
+ところが，次の使い方をするユーザには適用できない 😭
+
+
+```julia
+julia> struct Affine
+           W::Matrix{Float64}
+           b::Vector{Float64}
+       end
+julia> Wf32 = rand(Float32, 2, 2); bf32 = rand(Float32, 2);
+julia> Affine(Wf32, bf32).W |> typeof
+Matrix{Float64} (alias for Array{Float64, 2}) # Float32 で計算したいのに...
+julia> using CUDA
+julia> Wcu = CUDA.rand(2,2); bcu = CUDA.rand(2,2)
+julia> Affine(Wcu, bcu).W |> typeof
+julia> Matrix{Float64} (alias for Array{Float64, 2}) # GPU のリソース使いたかったのに．．．
+julia> W = OffsetArray(rand(2,2), 0:1, 0:1)
+```
+
+
+アフィン変換は汎用性が高いので多くの場面でいい感じに振る舞ってほしい
+
+
+---
+
+
+
+
+
+
+# 構造体: アフィン変換の例 (6)
+
+
+次のようにしてパラメトリック構造体([Parametric Composite Types](https://docs.julialang.org/en/v1/manual/types/#man-parametric-composite-types)) によって定義する
+
+
+```julia
+julia> struct Affine{T1, T2}
+           W::T1
+           b::T2
+       end
+julia> (aff::Affine)(x) = aff.W * x + aff.b
+julia> Wf32 = rand(Float32, 2, 2); bf32 = rand(Float32, 2);
+julia> aff = Affine(Wf32, bf32);
+julia> @code_warntype aff(rand(Float32, 2))
+MethodInstance for (::Affine{Matrix{Float32}, Vector{Float32}})(::Vector{Float32})
+  from (aff::Affine)(x) @ Main REPL[7]:1
+Arguments
+  aff::Affine{Matrix{Float32}, Vector{Float32}}
+  x::Vector{Float32}
+Body::Vector{Float32}
+1 ─ %1 = Base.getproperty(aff, :W)::Matrix{Float32}
+│   %2 = (%1 * x)::Vector{Float32}
+│   %3 = Base.getproperty(aff, :b)::Vector{Float32}
+│   %4 = (%2 + %3)::Vector{Float32}
+└──      return %4
+```
+
+
+---
+
+
+
+
+
+
+# 構造体: アフィン変換の例 (7)
+
+
+今回のように 2x2, 3x3 程度の小規模の行列では配列のサイズ情報も含めて最適なコードを生成する StaticArrays.jl を用いた方法を採用すると良い
+
+
+```julia
+julia> using StaticArrays
+julia> struct Affine{T1, T2}
+           W::T1
+           b::T2
+       end
+julia> (aff::Affine)(x) = aff.W * x + aff.b
+julia> W = @SMatrix rand(Float32, 2,2)
+2×2 SMatrix{2, 2, Float32, 4} with indices SOneTo(2)×SOneTo(2):
+ 0.106584  0.369698
+ 0.182812  0.803011
+
+julia> b = @SVector rand(Float32, 2)
+2-element SVector{2, Float32} with indices SOneTo(2):
+ 0.8716512
+ 0.4812594
+julia> aff = Affine(W, b)
+julia> x = @SVector rand(Float32, 2)
+julia> aff(x)
+```
+
+
+---
+
+
+
+
+
+
+## 寄り道 (StaticArrays.jl による計算の様子)
+
+
+人間が直接 `W[1,1] * x[1] + W[1,2] * x[2]` のように書き下したのとほぼ同じことをしていることがわかる．
+
+
+```julia
+julia> # 前のページの続き
+julia> @code_typed aff(x)
+CodeInfo(
+1 ─ %1  = Base.getfield(aff, :W)::SMatrix{2, 2, Float32, 4} # W = aff.W
+│   %2  = StaticArrays.getfield(%1, :data)::NTuple{4, Float32} # W.data <- 生のデータにアクセス
+│   %3  = Base.getfield(%2, 3, false)::Float32 # W.data[3] == W[1,2]
+│   %4  = StaticArrays.getfield(x, :data)::Tuple{Float32, Float32} # data = x.data
+│   %5  = Base.getfield(%4, 2, false)::Float32 # x.data[2] == x[2]
+│   %6  = StaticArrays.getfield(%1, :data)::NTuple{4, Float32} # data = W.data
+│   %7  = Base.getfield(%6, 1, false)::Float32 # W.data[1] == W[1,1]
+│   %8  = StaticArrays.getfield(x, :data)::Tuple{Float32, Float32} # x.data
+│   %9  = Base.getfield(%8, 1, false)::Float32 # x.data[1]
+│   %10 = Base.mul_float(%7, %9)::Float32 # W[1,1] * x[1] 相当の計算
+│   %11 = Base.muladd_float(%3, %5, %10)::Float32 # W[1,2] * x[2] + W[1,1] * x[1]
+│   %12 = StaticArrays.getfield(%1, :data)::NTuple{4, Float32}
+(中略)
+└──       return %30
+) => SVector{2, Float32}
+```
+
+
+---
+
+
+
+
+
+
+## 寄り道 (ConcreteStructs.jl でサボる)
+
+
+```julia
+julia> struct Affine{T1, T2}
+           W::T1
+           b::T2
+       end
+```
+
+
+における `T1`, `T2` は形式的につけるものであって実装の部分としては本質的でない．実装時に人間が意識したくない．
+
+
+```julia
+julia> using ConcreteStructs # @concrete マクロを提供する
+julia> @macroexpand @concrete struct Affine; W; b; end
+```
+
+
+下記のコードと等価
+
+
+```julia
+struct Affine{__T_W, __T_b} <: Any
+      W::__T_W
+      b::__T_b
+      function Affine(W::__T_W, b::__T_b) where {__T_W, __T_b}
+          return new{__T_W, __T_b}(W, b)
+      end
+  end)
+```
+
+
+---
+
+
+
+
+
+
+## 寄り道 (サボり方)
+
+
+型を意識しなくて済む.
+
+
+```julia
+julia> using ConcreteStructs; @concrete struct Affine; W; b; end
+
+julia> using StaticArrays
+
+julia> W = @SMatrix rand(2,2);
+
+julia> b = @SVector rand(2)
+2-element SVector{2, Float64} with indices SOneTo(2):
+ 0.620866754177038
+ 0.5075755639223726
+
+julia> aff = Affine(W, b)
+Affine{SMatrix{2, 2, Float64, 4}, SVector{2, Float64}}([0.21089312982809838 0.4062630292552363; 0.039518291001160444 0.6804761753346954], [0.620866754177038, 0.5075755639223726])
+```
+
+
+今までの議論から分かるように，サボるにはそれなりの教養が必要．
 
 
 ---
@@ -1459,7 +1819,7 @@ function sumevens(N::Integer)
     arr = []
     for n in 1:N
         if iseven(n)
-            push!(arr, n)
+            push!(arr, n) # Python での `arr.append(n)` 相当
         end
     end
     return sum(arr)
@@ -1555,7 +1915,7 @@ julia> using JET; report_call(sumevens, (Int,))
 # JET.jl を用いた潜在的なエラーの発見 (4)
 
 
-`arr = Int[]` とすればよい．
+処方箋は次のとおり．`arr = Int[]` とすればよい．
 
 
 ```julia
@@ -1824,6 +2184,7 @@ end
 ```
 
 
+  * [terasakisatoshi/Sacabambaspis.jl](https://github.com/terasakisatoshi/Sacabambaspis.jl)
   * 詳しいことは [Pluto's built-in package management](https://github.com/fonsp/Pluto.jl/wiki/%F0%9F%8E%81-Package-management) を読むと良い.
 
 
@@ -1931,8 +2292,7 @@ class: middle, center
 
       * 皆さんの感想を教えてください
   * エコシステムが個人や集団からなるコミュニティベースで作られていることがわかる
-  * 試す・触る側 -> 使う側 -> 使いこなす側 -> 作る -> 作ったものを使ってもらう (割と大変)
-  * Julia言語を多くの人に試してもらい，作る側の立場に立てる方が増えれば幸いです
+  * Julia言語を多くの人に試してもらい作る側の立場に立てる方が増えれば幸いです
 
 
 ---
@@ -1946,6 +2306,46 @@ class: middle, center
 
 
 # 以上
+
+
+---
+
+
+class: middle, center
+
+
+
+
+
+
+# Appendix
+
+
+---
+
+
+
+
+
+
+# 個人的な意見として
+
+
+  * Julia は数学や物理の人に寄り添っているが......
+
+      * "良い"コードを書くにはそれなりにソフトウェアの知識・素養が必要なことには変わらない．
+      * 特定の技術に対するメンタルモデルの学習をせず野蛮な使い方をする人も少なくはない......
+  * 試す・触る側 → 使う側 → 使いこなす側 → 作る → 作ったものを使ってもらう → 作ったものを維持する (割と大変)
+
+      * 「作る，維持する」立場にいる人（たどり着ける人）が少ない．
+      * 紙と鉛筆の上で満足してる人は手を動かす人，作れる人へのリスペクトの薄さがあるのかもしれない......
+      * 基礎研究のための基礎的なソフトウェアの開発基盤まで頭が回ってないのかもしれない......
+  * 国内で物理や純粋数学の分野を理解し扱える技術者の養成はその分野の人が行わないと増えない.
+  * 大学を卒業して技術職としてキャリアを積んだ人間が基礎研究のためのソフトウェア開発に貢献できるチャンスがあると良さそう.
+  * 大学の研究者の忙しさは異常．研究・学生の指導に時間を割ける余裕があると良いと思う......
+
+
+---
 
     </textarea>
 
