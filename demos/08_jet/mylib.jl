@@ -78,4 +78,3 @@ function sumevens(N::Integer)
     end
     return sum(arr)
 end
-

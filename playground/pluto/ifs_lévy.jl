@@ -6,15 +6,15 @@ using InteractiveUtils
 
 # ╔═╡ 1575da66-69bc-404b-8b59-ef262f04da74
 begin
-	using Plots
-	using StaticArrays
-	using Distributions
+    using Plots
+    using StaticArrays
+    using Distributions
 end
 
 # ╔═╡ a0722935-2638-4761-a3a3-7d48e79af51b
 begin
-	using BenchmarkTools
-	using ProfileSVG
+    using BenchmarkTools
+    using ProfileSVG
 end
 
 # ╔═╡ 1dcfa0dd-4763-42a5-8f42-bdc219f8dc12
@@ -27,42 +27,42 @@ md"""
 
 # ╔═╡ 4ace389a-173a-11ee-0955-c1350a6f0427
 begin
-	struct Affine
-		W
-		b
-	end
+    struct Affine
+        W
+        b
+    end
 
-	(aff::Affine)(x) = aff.W * x + aff.b
+    (aff::Affine)(x) = aff.W * x + aff.b
 end
 
 # ╔═╡ 8abb0481-e408-4a47-b33f-6686871a45cd
 begin
-	transforms = (
-		Affine([0.5 -0.5; 0.5 0.5], [0., 0.]),
-		Affine([0.5 0.5; -0.5 0.5], [0.5, 0.5]),
-	)
-	catdist = Categorical([0.5, 0.5])
+    transforms = (
+        Affine([0.5 -0.5; 0.5 0.5], [0.0, 0.0]),
+        Affine([0.5 0.5; -0.5 0.5], [0.5, 0.5]),
+    )
+    catdist = Categorical([0.5, 0.5])
 end
 
 # ╔═╡ d3533d36-5f4e-4d70-8503-ebf590516d43
 function generate_points(tfms, d)
-	xs = Float64[]
-	ys = Float64[]
-	x = 0. 
-	y = 0.
-	for i in 1:10000
-		aff = tfms[rand(d)]
-		x, y = aff([x, y])
-		push!(xs, x)
-		push!(ys, y)
-	end
-	xs, ys
+    xs = Float64[]
+    ys = Float64[]
+    x = 0.0
+    y = 0.0
+    for i in 1:10000
+        aff = tfms[rand(d)]
+        x, y = aff([x, y])
+        push!(xs, x)
+        push!(ys, y)
+    end
+    xs, ys
 end
 
 # ╔═╡ c3e59e97-0ef7-409b-afe9-e123cc92770a
 begin
-	xs, ys = generate_points(transforms, catdist)
-	scatter(xs, ys, aspect_ratio=:equal, label=:none)
+    xs, ys = generate_points(transforms, catdist)
+    scatter(xs, ys, aspect_ratio=:equal, label=:none)
 end
 
 # ╔═╡ 22dd99ac-4b53-4664-8ec7-9a7ce852ff9b

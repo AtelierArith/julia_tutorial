@@ -7,7 +7,14 @@ using InteractiveUtils
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
     quote
-        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
+        local iv = try
+            Base.loaded_modules[Base.PkgId(
+                Base.UUID("6e696c72-6542-2067-7265-42206c756150"),
+                "AbstractPlutoDingetjes",
+            )].Bonds.initial_value
+        catch
+            b -> missing
+        end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
@@ -16,9 +23,9 @@ end
 
 # ╔═╡ 1575da66-69bc-404b-8b59-ef262f04da74
 begin
-	using Plots
-	using StaticArrays
-	using Distributions
+    using Plots
+    using StaticArrays
+    using Distributions
 end
 
 # ╔═╡ 79a3dd1f-8800-4a9c-98c3-fa61ee9c1489
@@ -26,8 +33,8 @@ using PlutoUI
 
 # ╔═╡ a0722935-2638-4761-a3a3-7d48e79af51b
 begin
-	using BenchmarkTools
-	using ProfileSVG
+    using BenchmarkTools
+    using ProfileSVG
 end
 
 # ╔═╡ 1dcfa0dd-4763-42a5-8f42-bdc219f8dc12
@@ -45,70 +52,70 @@ md"""
 
 # ╔═╡ ed8b151a-7f16-4528-93d3-55790a13f672
 begin
-	ui_use_typestable = @bind use_typestable Select([false, true], default=false)
-	ui_use_staticarrays = @bind use_staticarrays Select([false, true], default=false)
-	ui_pattern = @bind pattern Select([:Lévy, :Barnsley])
-	nothing
+    ui_use_typestable = @bind use_typestable Select([false, true], default=false)
+    ui_use_staticarrays = @bind use_staticarrays Select([false, true], default=false)
+    ui_pattern = @bind pattern Select([:Lévy, :Barnsley])
+    nothing
 end
 
 # ╔═╡ 4ace389a-173a-11ee-0955-c1350a6f0427
 begin
-	if use_typestable
-		struct Affine{T1, T2}
-			W::T1
-			b::T2
-		end
-	else
-		struct Affine
-			W
-			b
-		end
-	end	
-	(aff::Affine)(x⃗::AbstractVector) = aff.W * x⃗ + aff.b
-	if use_staticarrays
-		(aff::Affine)(x, y) = aff(@SVector [x, y])
-	else
-		(aff::Affine)(x, y) = aff([x, y])
-	end
+    if use_typestable
+        struct Affine{T1,T2}
+            W::T1
+            b::T2
+        end
+    else
+        struct Affine
+            W
+            b
+        end
+    end
+    (aff::Affine)(x⃗::AbstractVector) = aff.W * x⃗ + aff.b
+    if use_staticarrays
+        (aff::Affine)(x, y) = aff(@SVector [x, y])
+    else
+        (aff::Affine)(x, y) = aff([x, y])
+    end
 end
 
 # ╔═╡ 911d8378-df85-4652-90d3-388e36aea42b
 pattern2ifs = Dict(
-	:Lévy => let
-		transforms = (
-			Affine([0.5 -0.5; 0.5 0.5], [0., 0.]),
-			Affine([0.5 0.5; -0.5 0.5], [0.5, 0.5]),
-		)
-		catdist = Categorical([0.5, 0.5])
-		(transforms, catdist)
-	end,
-	:Barnsley => let
-		transforms = (
-			Affine([0. 0.; 0 0.16], [0., 0.]),
-			Affine([0.85 0.04; -0.04 0.85], [0., 1.6]),
-			Affine([0.2 -0.26; 0.23 0.22], [0., 1.6]),
-			Affine([-0.15 0.28; 0.26 0.24], [0., 0.44]),
-		)
-		catdist = Categorical([0.01,0.85,0.07,0.07])
-		(transforms, catdist)
-	end
+    :Lévy => let
+        transforms = (
+            Affine([0.5 -0.5; 0.5 0.5], [0.0, 0.0]),
+            Affine([0.5 0.5; -0.5 0.5], [0.5, 0.5]),
+        )
+        catdist = Categorical([0.5, 0.5])
+        (transforms, catdist)
+    end,
+    :Barnsley => let
+        transforms = (
+            Affine([0.0 0.0; 0 0.16], [0.0, 0.0]),
+            Affine([0.85 0.04; -0.04 0.85], [0.0, 1.6]),
+            Affine([0.2 -0.26; 0.23 0.22], [0.0, 1.6]),
+            Affine([-0.15 0.28; 0.26 0.24], [0.0, 0.44]),
+        )
+        catdist = Categorical([0.01, 0.85, 0.07, 0.07])
+        (transforms, catdist)
+    end,
 )
 
 # ╔═╡ 8abb0481-e408-4a47-b33f-6686871a45cd
 begin
-	_transforms, _catdist = pattern2ifs[pattern]
-	if use_staticarrays
-		transforms = map(_transforms) do t
-			W = SMatrix{2, 2}(t.W)
-			b = SVector{2}(t.b)
-			Affine(W, b)
-		end
-		p = SVector{length(_catdist.p)}(_catdist.p)
-		catdist = Categorical(p)
-	else
-		transforms = _transforms
-		catdist = _catdist
-	end
+    _transforms, _catdist = pattern2ifs[pattern]
+    if use_staticarrays
+        transforms = map(_transforms) do t
+            W = SMatrix{2,2}(t.W)
+            b = SVector{2}(t.b)
+            Affine(W, b)
+        end
+        p = SVector{length(_catdist.p)}(_catdist.p)
+        catdist = Categorical(p)
+    else
+        transforms = _transforms
+        catdist = _catdist
+    end
 end
 
 # ╔═╡ b47ba401-32de-49c5-af0e-24cdc2cef8d5
@@ -116,39 +123,39 @@ typeof(transforms)
 
 # ╔═╡ d3533d36-5f4e-4d70-8503-ebf590516d43
 begin
-	function generate_points!(xs, ys, tfms, d)
-		x = 0.
-		y = 0.
-		for i in eachindex(xs, ys)
-			aff = tfms[rand(d)]
-			x, y = aff(x, y)
-			xs[i] = x
-			ys[i] = y
-		end
-	end
-	
-	function generate_points(tfms, d)
-		N = 10000
-		xs = Vector{Float64}(undef, 10000)
-		ys = Vector{Float64}(undef, 10000)
-		generate_points!(xs, ys, tfms, d)
-		xs, ys
-	end
+    function generate_points!(xs, ys, tfms, d)
+        x = 0.0
+        y = 0.0
+        for i in eachindex(xs, ys)
+            aff = tfms[rand(d)]
+            x, y = aff(x, y)
+            xs[i] = x
+            ys[i] = y
+        end
+    end
+
+    function generate_points(tfms, d)
+        N = 10000
+        xs = Vector{Float64}(undef, 10000)
+        ys = Vector{Float64}(undef, 10000)
+        generate_points!(xs, ys, tfms, d)
+        xs, ys
+    end
 end
 
 # ╔═╡ c3e59e97-0ef7-409b-afe9-e123cc92770a
 begin
-	xs, ys = generate_points(transforms, catdist)
-	scatter(xs, ys, aspect_ratio=:equal, label=:none)
+    xs, ys = generate_points(transforms, catdist)
+    scatter(xs, ys, aspect_ratio=:equal, label=:none)
 end
 
 # ╔═╡ 2b5de833-5512-400c-93d5-2d40dcaca7ab
 begin
-	[
-		PlutoUI.ExperimentalLayout.hbox(["IFS パターン", ui_pattern]),
-		PlutoUI.ExperimentalLayout.hbox(["型安定", ui_use_typestable]),
-		PlutoUI.ExperimentalLayout.hbox(["StaticArrays を使う", ui_use_staticarrays])
-	] |> PlutoUI.ExperimentalLayout.vbox
+    [
+        PlutoUI.ExperimentalLayout.hbox(["IFS パターン", ui_pattern]),
+        PlutoUI.ExperimentalLayout.hbox(["型安定", ui_use_typestable]),
+        PlutoUI.ExperimentalLayout.hbox(["StaticArrays を使う", ui_use_staticarrays]),
+    ] |> PlutoUI.ExperimentalLayout.vbox
 end
 
 # ╔═╡ 22dd99ac-4b53-4664-8ec7-9a7ce852ff9b
@@ -156,10 +163,10 @@ end
 
 # ╔═╡ 4bdb58fb-e71a-466b-bd99-77b0fda6d6cd
 @benchmark generate_points!(xs, ys, tfm, d) setup = begin
-	xs = Vector{Float64}(undef, 10000)
-	ys = Vector{Float64}(undef, 10000)
-	tfm = transforms
-	d = catdist
+    xs = Vector{Float64}(undef, 10000)
+    ys = Vector{Float64}(undef, 10000)
+    tfm = transforms
+    d = catdist
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001

@@ -1,4 +1,5 @@
-import Pkg; Pkg.instantiate()
+import Pkg;
+Pkg.instantiate();
 using NodeJS
 run(`$(npm_cmd()) install highlight.js purgecss`)
 import PkgPage

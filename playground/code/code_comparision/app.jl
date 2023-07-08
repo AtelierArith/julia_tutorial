@@ -5,37 +5,37 @@ using DashBootstrapComponents
 using IOCapture
 using InteractiveUtils: clipboard
 
-app = dash(external_stylesheets = [dbc_themes.BOOTSTRAP])
+app = dash(external_stylesheets=[dbc_themes.BOOTSTRAP])
 
-app.layout = dbc_container(className = "mxy-auto") do
+app.layout = dbc_container(className="mxy-auto") do
     html_h1("Code Comparision Tool"),
     html_div("Put your code before including codeA and codeB"),
     dcc_textarea(
-        id = "text-code-common",
-        placeholder = "common code",
-        rows = 10,
-        style = Dict(:width => "100%"),
+        id="text-code-common",
+        placeholder="common code",
+        rows=10,
+        style=Dict(:width => "100%"),
     ),
-    html_div(id = "result-common"),
+    html_div(id="result-common"),
     dbc_row([
         dbc_col([
             html_h2("codeA"),
             dcc_textarea(
-                id = "text-codeA",
-                placeholder = "codeA",
-                value = "",
-                rows = 2,
-                style = Dict(:width => "100%"),
+                id="text-codeA",
+                placeholder="codeA",
+                value="",
+                rows=2,
+                style=Dict(:width => "100%"),
             ),
         ]),
         dbc_col([
             html_h2("codeB"),
             dcc_textarea(
-                id = "text-codeB",
-                placeholder = "codeB",
-                value = "",
-                rows = 2,
-                style = Dict(:width => "100%"),
+                id="text-codeB",
+                placeholder="codeB",
+                value="",
+                rows=2,
+                style=Dict(:width => "100%"),
             ),
         ]),
     ],),
@@ -43,44 +43,44 @@ app.layout = dbc_container(className = "mxy-auto") do
         dbc_col(
             dbc_button(
                 "Compare",
-                id = "button-compare",
-                color = "primary",
-                className = "margin-auto",
-                size = "sm",
+                id="button-compare",
+                color="primary",
+                className="margin-auto",
+                size="sm",
             ),
         ),
     ],),
-    html_h3("Result", style = Dict("text-align" => "center")),
+    html_h3("Result", style=Dict("text-align" => "center")),
     dbc_row([
         dbc_col(
             dcc_textarea(
-                id = "text-resultA",
-                placeholder = "resultA",
-                value = "",
-                rows = 10,
-                readOnly = true,
-                style = Dict(:width => "100%"),
+                id="text-resultA",
+                placeholder="resultA",
+                value="",
+                rows=10,
+                readOnly=true,
+                style=Dict(:width => "100%"),
             ),
         ),
         dbc_col(
             dcc_textarea(
-                id = "text-resultB",
-                placeholder = "resultB",
-                value = "",
-                rows = 10,
-                readOnly = true,
-                style = Dict(:width => "100%"),
+                id="text-resultB",
+                placeholder="resultB",
+                value="",
+                rows=10,
+                readOnly=true,
+                style=Dict(:width => "100%"),
             ),
         ),
     ],),
     dbc_row([
-        dbc_col(dbc_button("Copy result A", id = "button-copyA", color = "primary")),
-        dbc_col(dbc_button("Copy result B", id = "button-copyB", color = "primary")),
+        dbc_col(dbc_button("Copy result A", id="button-copyA", color="primary")),
+        dbc_col(dbc_button("Copy result B", id="button-copyB", color="primary")),
     ],),
-    html_div("dummy-resultA", id = "dummy-resultA", style = Dict("display" => "none")),
-    html_div("dummy-resultB", id = "dummy-resultB", style = Dict("display" => "none")),
-    html_div("dummy-codeA", id = "dummy-codeA", style = Dict("display" => "none")),
-    html_div("dummy-codeB", id = "dummy-codeB", style = Dict("display" => "none"))
+    html_div("dummy-resultA", id="dummy-resultA", style=Dict("display" => "none")),
+    html_div("dummy-resultB", id="dummy-resultB", style=Dict("display" => "none")),
+    html_div("dummy-codeA", id="dummy-codeA", style=Dict("display" => "none")),
+    html_div("dummy-codeB", id="dummy-codeB", style=Dict("display" => "none"))
 end
 
 # Taken from Literate.jl and modified
@@ -116,7 +116,7 @@ callback!(
         return (nothing, nothing, nothing)
     end
 
-    cCommon = IOCapture.capture(rethrow = Union{}) do
+    cCommon = IOCapture.capture(rethrow=Union{}) do
         include_string(sb, vCommon)
     end
     retC = nothing
@@ -133,10 +133,10 @@ callback!(
         retC = nothing
     end
 
-    cA = IOCapture.capture(rethrow = Union{}) do
+    cA = IOCapture.capture(rethrow=Union{}) do
         include_string(sb, vA)
     end
-    cB = IOCapture.capture(rethrow = Union{}) do
+    cB = IOCapture.capture(rethrow=Union{}) do
         include_string(sb, vB)
     end
 
@@ -197,4 +197,4 @@ callback!(
     end
 end
 
-run_server(app, debug = true)
+run_server(app, debug=true)

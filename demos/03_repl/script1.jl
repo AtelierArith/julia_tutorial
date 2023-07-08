@@ -16,7 +16,7 @@ instructions = [
     "# :banana:<TAB> で 🍌 だよ!",
     "\\:banan$(TAB)$(TAB)",
     "# そんなバナナ〜",
-    "# ん？"
+    "# ん？",
 ]
 
 replay(instructions, use_ghostwriter=true)

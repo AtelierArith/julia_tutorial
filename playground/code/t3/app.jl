@@ -36,14 +36,14 @@ end
 # display game logo
 Panel(
     "{red}Play Tic-Tac-Toe{/red}",
-    title = "Term's",
-    title_style = "bold green",
-    style = "gold1 bold",
-    subtitle = "Panels",
-    subtitle_style = "bold blue",
-    subtitle_justify = :center,
-    fit = true,
-    justify = :center,
+    title="Term's",
+    title_style="bold green",
+    style="gold1 bold",
+    subtitle="Panels",
+    subtitle_style="bold blue",
+    subtitle_justify=:center,
+    fit=true,
+    justify=:center,
 ) |> println
 
 isfilled = Bool[
@@ -53,9 +53,9 @@ isfilled = Bool[
 ]
 
 table = Panel[
-    Panel(" ", fit = true) Panel(" ", fit = true) Panel(" ", fit = true)
-    Panel(" ", fit = true) Panel(" ", fit = true) Panel(" ", fit = true)
-    Panel(" ", fit = true) Panel(" ", fit = true) Panel(" ", fit = true)
+    Panel(" ", fit=true) Panel(" ", fit=true) Panel(" ", fit=true)
+    Panel(" ", fit=true) Panel(" ", fit=true) Panel(" ", fit=true)
+    Panel(" ", fit=true) Panel(" ", fit=true) Panel(" ", fit=true)
 ]
 
 table_str = String[
@@ -87,8 +87,8 @@ end
 # display init status
 Panel(
     prod(table[1, :]) / prod(table[2, :]) / prod(table[3, :]),
-    title = "Current status",
-    fit = true,
+    title="Current status",
+    fit=true,
 ) |> println
 
 mark = "○"
@@ -119,7 +119,7 @@ while true
         candr, candc = rand(findall((.!)(isfilled))).I
         continue
     else
-        table[r, c] = Panel(mark, fit = true)
+        table[r, c] = Panel(mark, fit=true)
         table_str[r, c] = mark
         isfilled[r, c] = true
     end
@@ -127,8 +127,8 @@ while true
     # display init status
     Panel(
         prod(table[1, :]) / prod(table[2, :]) / prod(table[3, :]),
-        title = "Current status",
-        fit = true,
+        title="Current status",
+        fit=true,
     ) |> println
 
     p = ask_who_wins()

@@ -19,9 +19,9 @@ instructions = [
     "using Revise",
     "# 中身を確認します",
     "run(`cat mylib.jl`)",
-    "# mylib.jl の変更を監視します", 
+    "# mylib.jl の変更を監視します",
     "includet(\"mylib.jl\")",
-    "# mylib.jl の中身を確認します", 
+    "# mylib.jl の中身を確認します",
     "run(`cat mylib.jl`)",
     "main()",
     "sleep(3)",
@@ -42,7 +42,7 @@ instructions = [
         end
     end
     """,
-    "# mylib.jl をリセットします", 
+    "# mylib.jl をリセットします",
     "reset_main(\"mylib.jl\")",
     "run(`cat mylib.jl`)",
 ]

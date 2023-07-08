@@ -12,7 +12,7 @@ function query2md(query::String)
         occursin(query, h3.text[begin])
     end |> first
     idx = findfirst(c -> c == h3, md.content)
-    Markdown.MD(md.content[idx + 1])
+    Markdown.MD(md.content[idx+1])
 end
 
 function id2md(session_id::Int)
@@ -22,8 +22,8 @@ function id2md(session_id::Int)
     (1 ≤ session_id ≤ 6) && (return query2md("$(session_id)　講演"))
     # それ以外のケースではタイムテーブルを表示するロジックにフォールバックさせる
     table = filter(md.content) do c
-        c isa Markdown.Table
-    end |> first |> Markdown.MD |> Term.parse_md
+                c isa Markdown.Table
+            end |> first |> Markdown.MD |> Term.parse_md
     table
 end
 
