@@ -1,5 +1,6 @@
 [deps]
 BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+ConcreteStructs = "2569d6c7-a4a2-43d3-a901-331e8e4be471"
 Cthulhu = "f68482b8-f384-11e8-15f7-abe071a5a75f"
 Debugger = "31a5f54b-26ea-5ae9-a837-f05ce5417438"
 Example = "7876af07-990d-54b4-ab0e-23690620f79a"
@@ -8,4 +9,5 @@ Profile = "9abbd945-dff8-562f-b5e8-e1ebf5ef1b79"
 ProfileSVG = "132c30aa-f267-4189-9183-c8a63c7e05e6"
 Replay = "dd78c5bf-19c4-4e9c-96ce-c3ec745c7812"
 Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 TerminalClock = "65687e93-20ea-45b9-bbc3-ed39219e1d43"
