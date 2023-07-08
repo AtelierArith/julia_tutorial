@@ -46,7 +46,8 @@ end
 function main1(N=10)
     rng = MersenneTwister(0)
     s = 0.0
-    for y in [relu1(2rand(rng) - 1) for _ in 1:N]
+    arr = [relu1(2rand(rng) - 1) for _ in 1:N]
+    for y in arr
         # s = s + y
         s += y
     end
@@ -56,7 +57,8 @@ end
 function main3(N=10)
     rng = MersenneTwister(0)
     s = 0.0
-    for y in [relu3(2rand(rng) - 1) for _ in 1:N]
+    arr = [relu3(2rand(rng) - 1) for _ in 1:N]
+    for y in arr
         # s = s + y
         s += y
     end
