@@ -2,7 +2,7 @@ class: middle, center
 
 # チュートリアル講演
 
-## Julia 入門 
+## Julia 入門
 
 `Satoshi Terasaki @ AtelierArith`
 
@@ -52,7 +52,7 @@ println("更新日: $(Dates.now())") # hide
 - Julia というプログラミング言語に出会ったきっかけが紹介されている. 例えば以下のようなもの:
   - [Why We Created Julia](https://julialang.org/blog/2012/02/why-we-created-julia/) を読んでソースをビルドした
   - 同僚，職場，講義で出会った
-  - C/C++/Fortran は難しい..., Python は簡単に使えるけれど遅い... 
+  - C/C++/Fortran は難しい..., Python は簡単に使えるけれど遅い...
   - 気づいたら特定のパッケージのメンテナになっていた
 
 ---
@@ -66,7 +66,7 @@ println("更新日: $(Dates.now())") # hide
 # 直近の動き
 
 - Juila 1.9 がリリース
-  - TTFX 問題が改善される !!! 
+  - TTFX 問題が改善される !!!
     - 可視化ツールの使用が捗る！
 
 - デバッグまわりのツールが増えてきた
@@ -79,7 +79,7 @@ println("更新日: $(Dates.now())") # hide
 
 ## そこでチュートリアル講演です
 
-概要: ライトユースにも使いたい、けれどもそれで高速性を犠牲にしたくない。総合的に開発できるものにしたい。超初心者にも習得は容易でありながら、ハッカーの満足にも応えられるものがほしい。」そういった願いからプログラミング言語 Julia が誕生しました。直近では v1.9 がリリースされ、長年課題であったパッケージの読み込み時間の短縮など、開発体験の改善が行われました。さらに和書の入門書も充実してきており、学習を始めるには絶好のタイミングといえるでしょう。本チュートリアル講演では Julia の入門として 
+概要: ライトユースにも使いたい、けれどもそれで高速性を犠牲にしたくない。総合的に開発できるものにしたい。超初心者にも習得は容易でありながら、ハッカーの満足にも応えられるものがほしい。」そういった願いからプログラミング言語 Julia が誕生しました。直近では v1.9 がリリースされ、長年課題であったパッケージの読み込み時間の短縮など、開発体験の改善が行われました。さらに和書の入門書も充実してきており、学習を始めるには絶好のタイミングといえるでしょう。本チュートリアル講演では Julia の入門として
 
 1. インストールと基本的な使い方 (<-- このスライドの担当箇所)
 2. 型と多重ディスパッチ
@@ -214,7 +214,7 @@ The latest version of Julia in the `1.9` channel is 1.9.2+0.x64.apple.darwin14. 
 to install Julia 1.9.2+0.x64.apple.darwin14 and update the `1.9` channel to that version.
 ```
 
-- [Julia’s Release Process](https://julialang.org/blog/2019/08/release-process/) 
+- [Julia’s Release Process](https://julialang.org/blog/2019/08/release-process/)
 
 ---
 
@@ -298,7 +298,7 @@ Hello World
 
 julia> print("Hello"); print(" "); print("World") # セミコロンで繋げることもできる
 Hello World
-julia> 
+julia>
 ```
 
 `julia>` の部分はプロンプトと呼ばれる. `julia>` の部分も含めてコピペしても REPL 側がいい感じに処理してくれる. 下記のブロックを丸ごとコピーしてみると適切な出力を出すはずだ.
@@ -369,7 +369,7 @@ julia> @doc θ̂
 
 ### 寄り道(マクロについて)
 
-マクロは呼ばれる式の断片を受け取り新しい式を生成する. 
+マクロは呼ばれる式の断片を受け取り新しい式を生成する.
 
  `@doc θ̂` は `(Base.Docs.doc)((Base.Docs.Binding)(Main, :θ̂))` を生成する. その様子は次のようにして確認できる
 
@@ -429,7 +429,7 @@ julia> if ω ^ 3 ≈ 1
          else
              Base.throw(Base.AssertionError("ω ^ 3 ≈ 1"))
          end
-```    
+```
 
 ---
 
@@ -488,7 +488,7 @@ end
 
 ```julia
 julia> using Example
-julia> hello("World") 
+julia> hello("World")
 "Hello, World"
 julia> domath(3)
 8
@@ -593,9 +593,9 @@ class: middle, center
   - それらを管理する必要がある．
 - `Project.toml` にて使用するパッケージを記述
   - `Manifest.toml` はより詳細な依存関係の情報を格納 (`Project.toml` から自動生成される)
-- `Pkg.activate("path/to/Project.toml")` 
+- `Pkg.activate("path/to/Project.toml")`
   - プロジェクト(環境)をアクティベート(活性化)する．
-- `Pkg.instantiate()` 
+- `Pkg.instantiate()`
   - `Project.toml` から `Manifest.toml` を作る．
   - `Manifest.toml` から依存関係を解決
 -  `JuliaProject.toml` と書くこともできる（混乱がなければ `Project.toml` でよい）．
@@ -646,10 +646,10 @@ JIT コンパイルが毎回走るので（人間にとって）効率が悪い�
 ```julia
 julia> include("mylib.jl")
 julia> main()
-# 別のターミナルで作業して mylib.jl 
+# 別のターミナルで作業して mylib.jl
 julia> include("mylib.jl")
 julia> main()
-# 別のターミナルで作業して mylib.jl 
+# 別のターミナルで作業して mylib.jl
 ```
 
 これでも良いが Revise.jl を使うと良い（次のページへ）
@@ -726,7 +726,7 @@ julia> @enter main()
 - 実際 [Argument-type declarations](https://docs.julialang.org/en/v1/manual/functions/#Argument-type-declarations) にあるように関数の引数に対して型アノテーションが必要な理由は `Dispatch`, `Correctness`, `Clarity` の３つであって，実行速度の理由で必要とするわけでない．
 - `@code_xxx` 系のマクロの説明は Stack Overflow での議論
 [`What is the difference between @code_native, @code_typed and @code_llvm in Julia?`](https://stackoverflow.com/questions/43453944/what-is-the-difference-between-code-native-code-typed-and-code-llvm-in-julia) の解説がわかりやすい．
-  
+
 
 ---
 
@@ -843,7 +843,8 @@ using Random
 function main1(N=10)
     rng = MersenneTwister(0)
     s = 0.0
-    for y in [relu1(2rand(rng) - 1) for _ in 1:N]
+    arr = [relu1(2rand(rng) - 1) for _ in 1:N]
+    for y in arr
         # s = s + y
         s += y
     end
@@ -856,7 +857,8 @@ end
 function main3(N=10)
     rng = MersenneTwister(0)
     s = 0.0
-    for y in [relu3(2rand(rng) - 1) for _ in 1:N]
+    arr = [relu3(2rand(rng) - 1) for _ in 1:N]
+    for y in arr
         # s = s + y
         s += y
     end
@@ -969,7 +971,7 @@ ERROR: MethodError: no method matching zero(::Type{Any})
 ```
 
 - `N = 1` の時は `arr = []` の次にあるループは実質何もしない. 一番最後で `sum([])` を実行することになる．
-- `[]` は `Vector{Any}` を型とする要素数が 0 の配列. 
+- `[]` は `Vector{Any}` を型とする要素数が 0 の配列.
   - `Vector{Any}` は任意の値が格納できる. 任意の型に対するゼロ元を定義するのができないので Julia ではエラーを返す．
   - `no method matching zero(::Type{Any})` が出るのはこのため．
 
@@ -1059,7 +1061,7 @@ end
 
 # 高速化周り学習リソース(JuliaCon)
 
-佐藤さんによる `Julia高速化の常識･非常識 @ Bio”Pack”athon2022#12` 
+佐藤さんによる `Julia高速化の常識･非常識 @ Bio”Pack”athon2022#12`
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/D9V4m0mewoA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -1067,6 +1069,7 @@ end
 
 # Cthulhu.jl
 
+- クトゥルフ と発音するらしい。
 - ローカル変数がどのような型になっているかを観察できる
 - 誤解を恐れずに言えば Debugger.jl の型バージョン
 
@@ -1126,7 +1129,7 @@ class: middle, center
 
 # [Pluto.jl](https://plutojl.org/) について
 
-- Julia が動作するノートブック 
+- Julia が動作するノートブック
   - ソースコード: https://github.com/fonsp/Pluto.jl
   - 使い方: https://github.com/fonsp/Pluto.jl/wiki
 - ユーザが書いたコードが更新されるとセル間の依存関係を自動で解決する。
@@ -1148,7 +1151,7 @@ $ julia -e 'using Pkg; Pkg.add("Pluto")'
 
 #### 起動
 
-デフォルトのポート番号は 1234 
+デフォルトのポート番号は 1234
 
 ```console
 $ julia -e 'using Pluto; Pluto.run()'
@@ -1161,7 +1164,7 @@ $ docker run --rm -it -v $PWD:/work -w /work \
     -p 1234:1234 \
     julia:1.9.1 \
     julia -e 'using Pkg; Pkg.add("Pluto"); using Pluto; Pluto.run(host="0.0.0.0")'
-```    
+```
 
 ---
 
@@ -1203,6 +1206,26 @@ end
 - [julia-vscode/julia-vscode](https://github.com/julia-vscode/julia-vscode)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Okn_HKihWn8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+---
+
+# VS Code
+
+VS Code 1.8 から VS Code の統合ターミナル上で画像を表示できるようになった。
+
+```julia
+using ImageInTerminal
+using TestImages
+m = testimage("mandril_color")
+```
+
+```julia
+using FileIO, Sixel, Plots
+gr()
+buf = IOBuffer()
+show(buf, MIME("image/png"), plot(sin, size=(500, 300)))
+buf |> load |> sixel_encode
+```
 
 ---
 

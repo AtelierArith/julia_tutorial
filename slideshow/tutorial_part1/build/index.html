@@ -44,7 +44,7 @@ class: middle, center
 
 
 ```
-更新日: 2023-07-08T05:51:10.063
+更新日: 2023-07-08T12:10:27.568
 ```
 
 
@@ -127,7 +127,7 @@ class: middle, center
 
   * Juila 1.9 がリリース
 
-      * TTFX 問題が改善される !!! 
+      * TTFX 問題が改善される !!!
 
           * 可視化ツールの使用が捗る！
   * デバッグまわりのツールが増えてきた
@@ -152,7 +152,7 @@ class: middle, center
 ## そこでチュートリアル講演です
 
 
-概要: ライトユースにも使いたい、けれどもそれで高速性を犠牲にしたくない。総合的に開発できるものにしたい。超初心者にも習得は容易でありながら、ハッカーの満足にも応えられるものがほしい。」そういった願いからプログラミング言語 Julia が誕生しました。直近では v1.9 がリリースされ、長年課題であったパッケージの読み込み時間の短縮など、開発体験の改善が行われました。さらに和書の入門書も充実してきており、学習を始めるには絶好のタイミングといえるでしょう。本チュートリアル講演では Julia の入門として 
+概要: ライトユースにも使いたい、けれどもそれで高速性を犠牲にしたくない。総合的に開発できるものにしたい。超初心者にも習得は容易でありながら、ハッカーの満足にも応えられるものがほしい。」そういった願いからプログラミング言語 Julia が誕生しました。直近では v1.9 がリリースされ、長年課題であったパッケージの読み込み時間の短縮など、開発体験の改善が行われました。さらに和書の入門書も充実してきており、学習を始めるには絶好のタイミングといえるでしょう。本チュートリアル講演では Julia の入門として
 
 
 1. インストールと基本的な使い方 (<– このスライドの担当箇所)
@@ -499,7 +499,7 @@ Hello World
 
 julia> print("Hello"); print(" "); print("World") # セミコロンで繋げることもできる
 Hello World
-julia> 
+julia>
 ```
 
 
@@ -600,7 +600,7 @@ julia> @doc θ̂
 ### 寄り道(マクロについて)
 
 
-マクロは呼ばれる式の断片を受け取り新しい式を生成する. 
+マクロは呼ばれる式の断片を受け取り新しい式を生成する.
 
 
 `@doc θ̂` は `(Base.Docs.doc)((Base.Docs.Binding)(Main, :θ̂))` を生成する. その様子は次のようにして確認できる
@@ -758,7 +758,7 @@ end
 
 ```julia
 julia> using Example
-julia> hello("World") 
+julia> hello("World")
 "Hello, World"
 julia> domath(3)
 8
@@ -928,10 +928,10 @@ class: middle, center
   * `Project.toml` にて使用するパッケージを記述
 
       * `Manifest.toml` はより詳細な依存関係の情報を格納 (`Project.toml` から自動生成される)
-  * `Pkg.activate("path/to/Project.toml")` 
+  * `Pkg.activate("path/to/Project.toml")`
 
       * プロジェクト(環境)をアクティベート(活性化)する．
-  * `Pkg.instantiate()` 
+  * `Pkg.instantiate()`
 
       * `Project.toml` から `Manifest.toml` を作る．
       * `Manifest.toml` から依存関係を解決
@@ -1007,10 +1007,10 @@ JIT コンパイルが毎回走るので（人間にとって）効率が悪い�
 ```julia
 julia> include("mylib.jl")
 julia> main()
-# 別のターミナルで作業して mylib.jl 
+# 別のターミナルで作業して mylib.jl
 julia> include("mylib.jl")
 julia> main()
-# 別のターミナルで作業して mylib.jl 
+# 別のターミナルで作業して mylib.jl
 ```
 
 
@@ -1314,7 +1314,8 @@ using Random
 function main1(N=10)
     rng = MersenneTwister(0)
     s = 0.0
-    for y in [relu1(2rand(rng) - 1) for _ in 1:N]
+    arr = [relu1(2rand(rng) - 1) for _ in 1:N]
+    for y in arr
         # s = s + y
         s += y
     end
@@ -1327,7 +1328,8 @@ end
 function main3(N=10)
     rng = MersenneTwister(0)
     s = 0.0
-    for y in [relu3(2rand(rng) - 1) for _ in 1:N]
+    arr = [relu3(2rand(rng) - 1) for _ in 1:N]
+    for y in arr
         # s = s + y
         s += y
     end
@@ -1484,7 +1486,7 @@ ERROR: MethodError: no method matching zero(::Type{Any})
 
 
   * `N = 1` の時は `arr = []` の次にあるループは実質何もしない. 一番最後で `sum([])` を実行することになる．
-  * `[]` は `Vector{Any}` を型とする要素数が 0 の配列. 
+  * `[]` は `Vector{Any}` を型とする要素数が 0 の配列.
 
       * `Vector{Any}` は任意の値が格納できる. 任意の型に対するゼロ元を定義するのができないので Julia ではエラーを返す．
       * `no method matching zero(::Type{Any})` が出るのはこのため．
@@ -1608,7 +1610,7 @@ end
 # 高速化周り学習リソース(JuliaCon)
 
 
-佐藤さんによる `Julia高速化の常識･非常識 @ Bio”Pack”athon2022#12` 
+佐藤さんによる `Julia高速化の常識･非常識 @ Bio”Pack”athon2022#12`
 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/D9V4m0mewoA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -1624,6 +1626,7 @@ end
 # Cthulhu.jl
 
 
+  * クトゥルフ と発音するらしい。
   * ローカル変数がどのような型になっているかを観察できる
   * 誤解を恐れずに言えば Debugger.jl の型バージョン
 
@@ -1722,7 +1725,7 @@ class: middle, center
 # [Pluto.jl](https://plutojl.org/) について
 
 
-  * Julia が動作するノートブック 
+  * Julia が動作するノートブック
 
       * ソースコード: https://github.com/fonsp/Pluto.jl
       * 使い方: https://github.com/fonsp/Pluto.jl/wiki
@@ -1763,7 +1766,7 @@ $ julia -e 'using Pkg; Pkg.add("Pluto")'
 #### 起動
 
 
-デフォルトのポート番号は 1234 
+デフォルトのポート番号は 1234
 
 
 ```console
@@ -1853,6 +1856,33 @@ end
 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Okn_HKihWn8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+---
+
+
+
+
+# VS Code
+
+
+VS Code 1.8 から VS Code の統合ターミナル上で画像を表示できるようになった。
+
+
+```julia
+using ImageInTerminal
+using TestImages
+m = testimage("mandril_color")
+```
+
+
+```julia
+using FileIO, Sixel, Plots
+gr()
+buf = IOBuffer()
+show(buf, MIME("image/png"), plot(sin, size=(500, 300)))
+buf |> load |> sixel_encode
+```
 
 
 ---
