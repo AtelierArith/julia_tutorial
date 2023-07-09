@@ -4,17 +4,17 @@ class: middle, center
 
 ## Julia 入門
 
-`Satoshi Terasaki @ AtelierArith`
+Satoshi Terasaki (AtelierArith)
 
+2023/07/10
 
 ---
 
 # この資料について
 
 
-- この資料は何？
-- [数学と物理におけるJuliaの活用](https://akio-tomiya.github.io/julia_imi_workshop2023/) でのチュートリアル講演資料です．
-- [piever/Remark.jl](https://github.com/piever/Remark.jl) を使って Markdown 原稿をスライドとして表示させています.
+- [数学と物理におけるJuliaの活用](https://akio-tomiya.github.io/julia_imi_workshop2023/) でのチュートリアル講演資料
+- [piever/Remark.jl](https://github.com/piever/Remark.jl) を使って Markdown 原稿をスライドとして表示
 
 ```@example today
 using Dates # hide
@@ -402,7 +402,7 @@ julia> @doc θ̂
 
 マクロは呼ばれる式の断片を受け取り新しい式を生成する.
 
- `@doc θ̂` は `(Base.Docs.doc)((Base.Docs.Binding)(Main, :θ̂))` を生成する. その様子は次のようにして確認できる
+例えば `@doc θ̂` は `(Base.Docs.doc)((Base.Docs.Binding)(Main, :θ̂))` を生成する. その様子は次のようにして確認できる:
 
  ```repl
 julia> @macroexpand @doc θ̂
@@ -410,7 +410,7 @@ julia> @macroexpand @doc θ̂
 
 ```
 
-入力の仕方の他に，関数の使い方を知ることもできる．
+入力の仕方の他に，関数の使い方を知ることもできる:
 
 ```repl
 help?> ndims
@@ -434,7 +434,7 @@ help?> ndims
 
 ### 寄り道(マクロについて)
 
-1 の 原始 3 乗根 $\omega = \exp(2\pi\sqrt{-1}/3)$ をそのままコードに落とし込むと次のようになる.
+1 の 原始 3 乗根 $\omega = \exp(2\pi\sqrt{-1}/3)$ をそのままコードに落とし込むと次のようになる:
 
 ```repl
 julia> ω = exp(im * 2π/3) # im は虚数単位
@@ -466,16 +466,16 @@ julia> if ω ^ 3 ≈ 1
 
 ## 寄り道(フォントの問題)
 
-文字化けする場合は入力に用いるフォントを変更するとよい
+文字化けする場合は入力に用いるフォントを変更するとよい． 例えば次の候補がある:
 
 - [cormullion/juliamono](https://github.com/cormullion/juliamono)
 - [tohgarashi/JuGeM](https://github.com/tohgarashi/JuGeM)
 - [yuru7/juisee](https://github.com/yuru7/juisee)
 - [miiton/Cica](https://github.com/miiton/Cica)
 
-macOS の場合 `~/Library/Fonts/` 直下に `.ttf` 拡張子のファイルを配置
+例えば macOS の場合 `~/Library/Fonts/` 直下に `.ttf` 拡張子のファイルを配置する．
 
-```console
+```julia
 julia> using Plots; plot(sin, label="三角関数", title="日本語", fontfamily="JuGeM-Regular")
 ```
 
@@ -492,7 +492,7 @@ julia> hello("Example")
 julia> Pkg.rm("Example") # アンインストール
 ```
 
-[Pkg mode](https://docs.julialang.org/en/v1/stdlib/REPL/#Pkg-mode) を用いて次のようにして書くこともできる
+[Pkg mode](https://docs.julialang.org/en/v1/stdlib/REPL/#Pkg-mode) を用いて次のようにして書くこともできる:
 
 ```repl
 julia> # ] を入力する
@@ -566,7 +566,7 @@ Example.jl は簡単すぎるかもしれない？
 julia> using TerminalClock; clock()
 ```
 
-- [JuliaPackaging/Preferences.jl](https://github.com/JuliaPackaging/Preferences.jl) によって時計の文字盤を制御することができる
+- [JuliaPackaging/Preferences.jl](https://github.com/JuliaPackaging/Preferences.jl) によって時計の文字盤を制御することができる:
 
 ```console
 $ julia -q
@@ -582,13 +582,13 @@ julia> using TerminalClock; clock()
 
 # Search mode
 
-- REPL で入力した過去の履歴を検索できる.  `~/.julia/logs/repl_history.jl` に残っている．
-- 各々 `Ctrl-R`, `Ctrl-S` でサーチができる．
-- 入力途中の式 + `Ctrl-P` で以前入力したものを補完してくれる．
+- REPL で入力した過去の履歴を検索できる.  `~/.julia/logs/repl_history.jl` に残っている
+- 各々 `Ctrl-R`, `Ctrl-S` でサーチができる
+- 入力途中の式 + `Ctrl-P` で以前入力したものを補完してくれる
 
 ### [OhMyREPL.jl](https://github.com/KristofferC/OhMyREPL.jl) を使う場合
 
-[KristofferC/OhMyREPL.jl](https://github.com/KristofferC/OhMyREPL.jl) を使うと直感的に探すことができる．
+[KristofferC/OhMyREPL.jl](https://github.com/KristofferC/OhMyREPL.jl) を使うと直感的に探すことができる:
 
 ```repl
 julia> using OhMyREPL
@@ -652,6 +652,8 @@ $ julia -e 'using Pkg; Pkg.activate("."); Pkg.instantiate()'
 ```console
 $ julia --project=@. -e 'using Pkg; Pkg.instantiate()'
 ```
+
+---
 
 ## 例: 研究会の日程，講演者のアブストを確認する (2)
 
@@ -720,9 +722,9 @@ julia> main()
 
 # Debugger.jl
 
-- 文字通りデバッガ．
-- １行１行実行しその都度変数の状態を監視できる．
-- VS Code でもできるが REPL の上でもできる．
+- 文字通りデバッガ
+- １行１行実行しその都度変数の状態を監視できる
+- VS Code でもできるが REPL の上でもできる
 
 ```repl
 julia> using Debugger
