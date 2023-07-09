@@ -214,7 +214,12 @@ The latest version of Julia in the `1.9` channel is 1.9.2+0.x64.apple.darwin14. 
 to install Julia 1.9.2+0.x64.apple.darwin14 and update the `1.9` channel to that version.
 ```
 
-- [Julia’s Release Process](https://julialang.org/blog/2019/08/release-process/)
+```console
+$ juliaup update
+
+Installing Julia 1.9.2+0.x64.apple.darwin14
+  Downloading: [>                   ] 1.35 MiB/114.18 MiB eta: 14m
+```
 
 ---
 
@@ -225,6 +230,14 @@ to install Julia 1.9.2+0.x64.apple.darwin14 and update the `1.9` channel to that
 - [johnnychen94/jill.py](https://github.com/johnnychen94/jill.py)
   - `pip3 install jill && jill install`
 - [Docker](https://www.docker.com/) を用いて `docker run -it --rm julia:1.9.1` のようにしてコンテナを起動する
+
+# 参考資料
+
+- `1.9` 系が現時点で最新安定版. もし `1.10` がリリースされると `1.9` 系のサポート（バグ修正など）はしなくなる．
+  - よっしゃー!新しいバージョンが出たぞー．アップデートする〜〜〜というノリが通常運転
+- 特定のバージョンを長く使いたい場合は LTS (`1.6` 系) を使うと良い.
+- [Julia’s Release Process](https://julialang.org/blog/2019/08/release-process/)
+
 
 ---
 
