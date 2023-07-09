@@ -835,7 +835,7 @@ relu3(x) = x > 0 ? x : zero(x)
 relu3(x) = x > 0 ? x : zero(x)
 ```
 
-入力 $x$ は数学的には実数 $\mathbb{R}$ の要素であることに注意する．これは `x` の型 `T` が Julia の Real の派生型であることに対応する:
+入力 $x$ は数学的には実数 $\mathbb{R}$ の要素であることに注意する．これは `x` の型 `T` が Julia の Real のサブタイプであることを要請する:
 
 ```julia
 relu4(x::Real) = x > 0 ? x : zero(x)
@@ -950,7 +950,7 @@ BenchmarkTools.Trial: 10000 samples with 1 evaluation.
 
 `code_warntype`, `JET.report_opt` などで検出する. 対応するマクロもある．
 
-```repl
+```julia
 using JET
 
 # 色々警告が出る．REPL だと警告は赤色で表示される
@@ -960,7 +960,7 @@ report_opt(main1, (Int,))
 @report_opt main1(10) # JET.report_opt(main1, (Base.typesof)(10))
 ```
 
-```repl
+```julia
 code_warntype(main3, (Int,))
 @code_warntype main3(10)
 report_opt(main3, (Int,))

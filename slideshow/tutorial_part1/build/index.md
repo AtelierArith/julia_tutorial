@@ -37,7 +37,7 @@ Satoshi Terasaki (AtelierArith)
 
 
 ```
-更新日: 2023-07-09T22:14:04.583
+更新日: 2023-07-09T22:59:15.499
 ```
 
 
@@ -1317,7 +1317,7 @@ relu3(x) = x > 0 ? x : zero(x)
 ```
 
 
-入力 $x$ は数学的には実数 $\mathbb{R}$ の要素であることに注意する．これは `x` の型 `T` が Julia の Real の派生型であることに対応する:
+入力 $x$ は数学的には実数 $\mathbb{R}$ の要素であることに注意する．これは `x` の型 `T` が Julia の Real のサブタイプであることを要請する:
 
 
 ```julia
@@ -1471,7 +1471,7 @@ BenchmarkTools.Trial: 10000 samples with 1 evaluation.
 `code_warntype`, `JET.report_opt` などで検出する. 対応するマクロもある．
 
 
-```repl
+```julia
 using JET
 
 # 色々警告が出る．REPL だと警告は赤色で表示される
@@ -1482,7 +1482,7 @@ report_opt(main1, (Int,))
 ```
 
 
-```repl
+```julia
 code_warntype(main3, (Int,))
 @code_warntype main3(10)
 report_opt(main3, (Int,))
