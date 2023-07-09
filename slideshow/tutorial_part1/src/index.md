@@ -1496,7 +1496,7 @@ end
 
 # VS Code (2)
 
-VS Code 1.8 から VS Code の統合ターミナル上で画像を表示できるようになった．
+VS Code 1.80.0 から VS Code の統合ターミナル上で画像を表示できるようになった．
 
 ```julia
 using ImageInTerminal
