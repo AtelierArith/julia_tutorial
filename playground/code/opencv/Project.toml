@@ -1,0 +1,4 @@
+[deps]
+ImageCore = "a09fc81d-aa75-5fe9-8630-4744c3626534"
+ImageInTerminal = "d8c32880-2388-543b-8c61-d9f865259254"
+OpenCV = "f878e3a2-a245-4720-8660-60795d644f2a"
