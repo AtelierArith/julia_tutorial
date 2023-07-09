@@ -231,6 +231,8 @@ Installing Julia 1.9.2+0.x64.apple.darwin14
   - `pip3 install jill && jill install`
 - [Docker](https://www.docker.com/) を用いて `docker run -it --rm julia:1.9.1` のようにしてコンテナを起動する
 
+---
+
 # 参考資料
 
 - `1.9` 系が現時点で最新安定版. もし `1.10` がリリースされると `1.9` 系のサポート（バグ修正など）はしなくなる．
@@ -336,9 +338,9 @@ Python と異なりインデントに関してセンシティブではないの�
 ```julia
 julia> function calcπ(N)
            cnt = 0
-           for a ∈ 1:N # ∈ は \in + <tab> `in` でも良い
-               for b in 1:N # in の代わりに `=` と書いても良い
-                   if gcd(a, b) == 1
+           for a ∈ 1:N # ∈ は \in + <tab> と入力する. `in` でも良い
+               for b in 1:N # `in` の代わりに `=` と書いても良い
+                   if gcd(a, b) == 1 # gcd(a, b) == 1 && (cnt += 1) とすることもできる
                        cnt += 1
                    end
                end
@@ -456,8 +458,11 @@ julia> if ω ^ 3 ≈ 1
 - [yuru7/juisee](https://github.com/yuru7/juisee)
 - [miiton/Cica](https://github.com/miiton/Cica)
 
+macOS の場合 `~/Library/Fonts/` 直下に `.ttf` 拡張子のファイルを配置
 
-macOS の場合 `~/Library/Fonts/` 直下に `ttf` 拡張子のファイルを配置
+```console
+julia> using Plots; plot(sin, label="三角関数", title="日本語", fontfamily="JuGeM-Regular")
+```
 
 ---
 
@@ -477,7 +482,7 @@ julia> Pkg.rm("Example") # アンインストール
 ```julia
 julia> # ] を入力する
 (@v1.9) pkg> add Example
-(@v1.9) pkg> ^C # コントロールと c を同時に押す
+(@v1.9) pkg> ^C # Ctrl と C を同時に押す
 julia> # 元に戻る
 ```
 
@@ -587,7 +592,7 @@ class: middle, center
 # Julia で開発する際のワークフロー
 
 - REPL の機能を触れたので Julia での開発ワークフローについて触れる
-- 知らないと人生を損する
+- 知るとことで人生が豊かになる（かも）
 
 ---
 
@@ -668,10 +673,10 @@ JIT コンパイルが毎回走るので（人間にとって）効率が悪い�
 ```julia
 julia> include("mylib.jl")
 julia> main()
-# 別のターミナルで作業して mylib.jl
+# 別のターミナルで作業して mylib.jl を編集
 julia> include("mylib.jl")
 julia> main()
-# 別のターミナルで作業して mylib.jl
+# 別のターミナルで作業して mylib.jl を編集
 ```
 
 これでも良いが Revise.jl を使うと良い（次のページへ）
@@ -1082,7 +1087,7 @@ julia> Matrix{Float64} (alias for Array{Float64, 2}) # GPU のリソース使い
 julia> W = OffsetArray(rand(2,2), 0:1, 0:1)
 ```
 
-アフィン変換は汎用性が高いので多くの場面でいい感じに振る舞ってほしい
+アフィン変換は汎用性が高いので多くの場面で"いい感じに"振る舞ってほしい
 
 ---
 
@@ -1441,12 +1446,12 @@ $ julia -e 'using Pkg; Pkg.add("Pluto")'
 $ julia -e 'using Pluto; Pluto.run()'
 ```
 
-Docker のイメージから出発すると次のように起動することができる．
+Docker の Julia 公式イメージから出発すると次のように起動することができる:
 
 ```console
 $ docker run --rm -it -v $PWD:/work -w /work \
     -p 1234:1234 \
-    julia:1.9.1 \
+    julia:1.9.2 \
     julia -e 'using Pkg; Pkg.add("Pluto"); using Pluto; Pluto.run(host="0.0.0.0")'
 ```
 
@@ -1454,6 +1459,7 @@ $ docker run --rm -it -v $PWD:/work -w /work \
 
 # Demo
 
+- [ソースコードはこちら](https://github.com/AtelierArith/julia_tutorial_pluto_materials)
 - [Lévy C curve](https://atelierarith.github.io/julia_tutorial_pluto_materials/ifs_l%C3%A9vy.html)
 - [反復関数系](https://atelierarith.github.io/julia_tutorial_pluto_materials/ifs_revised.html)
 - [RandomLogos.jl](https://atelierarith.github.io/julia_tutorial_pluto_materials/random_logos.html)
@@ -1512,6 +1518,19 @@ show(buf, MIME("image/png"), plot(sin, size=(500, 300)))
 buf |> load |> sixel_encode
 ```
 
+```julia
+using OpenCV
+using ImageCore: normedview, colorview, RGB
+using ImageInTerminal
+
+img_bgr = OpenCV.imread("sin.png")
+img_rgb = OpenCV.cvtColor(img_bgr, OpenCV.COLOR_BGR2RGB)
+# Julia のエコシステムが理解できるデータ構造に変換する
+jlimg = colorview(RGB, normedview(img_rgb))
+# メモリレイアウトの関係上， 空間方向の座標が反転していることに注意. 転置する.
+jlimg'
+```
+
 ---
 
 # VS Code (3)
@@ -1532,6 +1551,7 @@ class: middle, center
 
 # まとめ
 
+- Julia言語の導入, REPL 周りのエコシステムを紹介した
 - ここで紹介しきれなかったことはいっぱいある
 - 思ったよりも便利な機能があると思います
   - 皆さんの感想を教えてください
