@@ -21,7 +21,7 @@ using Dates # hide
 println("更新日: $(Dates.now())") # hide
 ```
 
-お勉強会資料はこちら `TODO 後で追記`
+本日の資料は [AtelierArith/julia_tutorial](https://github.com/AtelierArith/julia_tutorial) にあります．
 
 ---
 
