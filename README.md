@@ -18,7 +18,8 @@ $ julia --project=@. -e 'using Pkg; Pkg.instantiate()'
 
 # Page
 
-## デプロイズムのページ
+## デプロイ済みのページ
+
 https://atelierarith.github.io/julia_tutorial/
 
 ## ローカルでの表示
