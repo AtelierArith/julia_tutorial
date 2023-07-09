@@ -28,7 +28,7 @@ println("更新日: $(Dates.now())") # hide
 # ここでの Julia とは
 
 - プログラミング言語の一つ
-- 2012 年 [Why We Created Julia](https://julialang.org/blog/2012/02/why-we-created-julia/) に発表. 開発は 2009 年ごろから.
+- 2012 年 [Why We Created Julia](https://julialang.org/blog/2012/02/why-we-created-julia/) に発表. 開発は 2009 年ごろから
   - [Jeff Bezanson](https://github.com/JeffBezanson/), [Stefan Karpinski](https://karpinski.org/), [Viral B. Shah](https://github.com/ViralBShah/), and [Alan Edelman](https://math.mit.edu/~edelman/)
   - 冒頭で `In short, because we are greedy.` とあるように既存のプログラミング言語の良いところを取り入れた言語
 - 個人的に好きな箇所
@@ -45,8 +45,8 @@ println("更新日: $(Dates.now())") # hide
 # Why We Use Julia, 10 Years Later
 
 - 2022 年は 10 周年記念 🎉 [Why We Use Julia, 10 Years Later](https://julialang.org/blog/2022/02/10years/) が公開
-  - [JuliaLang/www.julialang.org](https://github.com/JuliaLang/www.julialang.org/tree/main) リポジトリで管理されている.
-  - [この原稿](https://github.com/JuliaLang/www.julialang.org/blob/main/blog/2022/02/10years.md) にみんなが集まって書いたもの.
+  - [JuliaLang/www.julialang.org](https://github.com/JuliaLang/www.julialang.org/tree/main) リポジトリで管理されている
+  - [この原稿](https://github.com/JuliaLang/www.julialang.org/blob/main/blog/2022/02/10years.md) にみんなが集まって書いたもの
     - 例: miguelraz さんの [Pull Request](https://github.com/JuliaLang/www.julialang.org/pull/1646) など
 
 - Julia というプログラミング言語に出会ったきっかけが紹介されている. 例えば以下のようなもの:
@@ -97,9 +97,9 @@ class: middle, center
 
 # Julia のインストール
 
-- 要するに `julia` というコマンドが利用できれば良い．
+- 要するに `julia` というコマンドが利用できれば良い
 
-```julia
+```console
 $ julia
                _
    _       _ _(_)_     |  Documentation: https://docs.julialang.org
@@ -175,16 +175,16 @@ $ curl -fsSL https://install.julialang.org | sh -s -- --yes
 
 # 動作確認
 
-インストールができたと仮定して進める．`julia` というコマンドを使うことができるか確認をする．
+インストールができたと仮定して進める． `julia` というコマンドを使うことができるか確認をする:
 
 ```console
 $ julia --version
 julia version 1.9.1
 ```
 
-何も指定しない場合 REPL(Read-Eval-Print Loop) が起動する．
+何も指定しない場合 REPL(Read-Eval-Print Loop) が起動する:
 
-```julia
+```console
 $ julia
                _
    _       _ _(_)_     |  Documentation: https://docs.julialang.org
@@ -202,8 +202,8 @@ julia>
 
 # Appendix: Julia 自体のアップデート
 
-- [Julia v1.9.2 has been released](https://discourse.julialang.org/t/julia-v1-9-2-has-been-released/101229) というアナウンスが出ました．
-- Juliaup 経由で入れていると次のような通知が出るはずです．
+- [Julia v1.9.2 has been released](https://discourse.julialang.org/t/julia-v1-9-2-has-been-released/101229) というアナウンスが出た
+- Juliaup 経由で入れていると次のような通知が出る
 
 ```console
 $ julia
@@ -236,8 +236,7 @@ Installing Julia 1.9.2+0.x64.apple.darwin14
 # 参考資料
 
 - `1.9` 系が現時点で最新安定版. もし `1.10` がリリースされると `1.9` 系のサポート（バグ修正など）はしなくなる．
-  - よっしゃー!新しいバージョンが出たぞー．アップデートする〜〜〜というノリが通常運転
-- 特定のバージョンを長く使いたい場合は LTS (`1.6` 系) を使うと良い.
+- 特定のバージョンを長く使いたい場合は LTS (`1.6` 系) を使うと良い
 - [Julia’s Release Process](https://julialang.org/blog/2019/08/release-process/)
 
 
@@ -257,7 +256,7 @@ class: middle, center
 $ julia script.jl
 ```
 
-- Julia は JIT コンパイルによって動作する言語である
+- Julia は JIT コンパイルによって動作する言語
 - `julia script.jl` するごとにパッケージのロード関数のコンパイルが行われるそのためのコストは無視できない
   - コンパイル結果を使い回し効率よく作業する必要がある
 - 試行錯誤時は REPL の上で作業をするのがよく行われる
@@ -267,11 +266,26 @@ $ julia script.jl
 
 ---
 
+## VS Code を使いたい場合
+
+- [VS Code のホームページ](https://code.visualstudio.com/)
+- [エクステンションの導入](https://www.julia-vscode.org/docs/dev/gettingstarted/)
+- [いくつか便利なショートカットキー](https://www.julia-vscode.org/docs/dev/userguide/keybindings/)
+  - ファイルにフォーカスを当てて `Shift + Enter` を押す
+  - `Alt-J Alt-O` で REPL を開く
+
+## Pluto.jl 使いたい場合
+
+- [Pluto.jl 入門](https://atelierarith.github.io/julia_tutorial/slideshow/pluto/build/#1)
+  - JuliaTokai で話た勉強会資料
+
+---
+
 # Julia を動かす (REPL)
 
 `versioninfo()` を使うと詳細な情報を得ることができる．バグレポートなどに添付すると良い．
 
-```julia
+```console
 $ julia
                _
    _       _ _(_)_     |  Documentation: https://docs.julialang.org
@@ -305,7 +319,7 @@ class: middle, center
 
 # REPL を使う (Julian mode)
 
-```julia
+```repl
 julia> 1 + 1 # 簡単な算数
 2
 
@@ -317,16 +331,17 @@ Hello World
 julia>
 ```
 
-`julia>` の部分はプロンプトと呼ばれる. `julia>` の部分も含めてコピペしても REPL 側がいい感じに処理してくれる. 下記のブロックを丸ごとコピーしてみると適切な出力を出すはずだ.
+`julia>` の部分はプロンプトと呼ばれる. `julia>` の部分も含めてコピペしても REPL 側が適切に処理する．
 
-```julia
+```repl
 julia> 1 == 2
 true # 実際は false なので実際に動かすと false になる
 julia> println("Hello")
 World # 実際は Hello が出るはず
 ```
 
-Python と異なりインデントに関してセンシティブではないのでコードを適当にコピペして自由に実行させることができる.
+- Python と異なりインデントに関してセンシティブではない
+- コードを適当にコピペして自由に実行させることができる
 
 
 ---
@@ -335,7 +350,7 @@ Python と異なりインデントに関してセンシティブではないの�
 
 正の整数 $a$, $b$ を選ぶ．$\gcd(a, b)$ が 1 となる確率が $1/\zeta(2) = 6/\pi^2$ となることを数値計算で確認する様子
 
-```julia
+```repl
 julia> function calcπ(N)
            cnt = 0
            for a ∈ 1:N # ∈ は \in + <tab> と入力する. `in` でも良い
@@ -363,7 +378,7 @@ julia> @time calcπ(10^4)
 - 例えば `x⁽¹⁾`, `xₖ`, `θ̂`, `⊻` のような文字も使うことができる
 - どう入力するべきなのか? REPL が教えてくれる!!!
 
-```julia
+```repl
 julia> # ここで ? を押す
 help?> ?θ̂
 "θ̂" can be typed by \theta<tab>\hat<tab>
@@ -371,13 +386,13 @@ help?> ?θ̂
 
 通常の Julian mode で呼び出すこともできる．
 
-```julia
+```repl
 julia> (Base.Docs.doc)((Base.Docs.Binding)(Main, :θ̂))
 ```
 
 上記のコードの代わりに下記のようにして `@doc` マクロを使うこともできる：
 
-```julia
+```repl
 julia> @doc θ̂
 ```
 
@@ -389,7 +404,7 @@ julia> @doc θ̂
 
  `@doc θ̂` は `(Base.Docs.doc)((Base.Docs.Binding)(Main, :θ̂))` を生成する. その様子は次のようにして確認できる
 
- ```julia
+ ```repl
 julia> @macroexpand @doc θ̂
 :((Base.Docs.doc)((Base.Docs.Binding)(Main, :θ̂)))
 
@@ -397,7 +412,7 @@ julia> @macroexpand @doc θ̂
 
 入力の仕方の他に，関数の使い方を知ることもできる．
 
-```julia
+```repl
 help?> ndims
   ndims(A::AbstractArray) -> Integer
 
@@ -421,7 +436,7 @@ help?> ndims
 
 1 の 原始 3 乗根 $\omega = \exp(2\pi\sqrt{-1}/3)$ をそのままコードに落とし込むと次のようになる.
 
-```julia
+```repl
 julia> ω = exp(im * 2π/3) # im は虚数単位
 -0.4999999999999998 + 0.8660254037844387im
 julia> @show ω
@@ -434,7 +449,7 @@ julia> @assert ω ^ 3 ≈ 1 # "≈" can be typed by \approx<tab>
 
 マクロを使わないと次のようなコードを書いていることになる:
 
-```julia
+```repl
 julia> ω = exp(im * 2π/3)
 -0.4999999999999998 + 0.8660254037844387im
 julia> println("ω = ", repr(begin dummyvariable = ω end)); dummyvariable
@@ -470,7 +485,7 @@ julia> using Plots; plot(sin, label="三角関数", title="日本語", fontfamil
 
 パッケージマネージャが付属している．
 
-```julia
+```repl
 julia> using Pkg; Pkg.add("Example") # JuliaLang/Example.jl をインストールする
 julia> using Example; Example.hello("World")
 julia> hello("Example")
@@ -479,7 +494,7 @@ julia> Pkg.rm("Example") # アンインストール
 
 [Pkg mode](https://docs.julialang.org/en/v1/stdlib/REPL/#Pkg-mode) を用いて次のようにして書くこともできる
 
-```julia
+```repl
 julia> # ] を入力する
 (@v1.9) pkg> add Example
 (@v1.9) pkg> ^C # Ctrl と C を同時に押す
@@ -492,7 +507,7 @@ julia> # 元に戻る
 
 上記のコードは実際に動作する例. Example.jl の実装は概ね次のようになっている. 詳細は [こちら](https://github.com/JuliaLang/Example.jl/blob/master/src/Example.jl) を参照せよ.
 
-```julia
+```repl
 module Example
 export hello, domath
 
@@ -505,7 +520,7 @@ end
 
 `export hello` と宣言しているので `using Example` によって `hello` を即時使うことができる．
 
-```julia
+```repl
 julia> using Example
 julia> hello("World")
 "Hello, World"
@@ -517,17 +532,17 @@ julia> domath(3)
 
 ## 名前空間の話
 
-- `export name` によってユーザが `name` を使うことができる.
+- `export name` によってユーザが `name` を使うことができる
 - 便利である一方「この関数はどこで定義しているのかぱっと見わからない」問題がある
 
-```julia
+```repl
 julia> using Example: hello
 julia> hello("World") # hello がロードされていることがわかる
 julia> domath(3) # これはできない
 julia> Example.domath(3) # このように使う
 ```
 
-```julia
+```repl
 julia> using Example: Example
 julia> import Example
 julia> Example.hello("World")
@@ -535,7 +550,7 @@ julia> Example.hello("World")
 
 その他下記のようにしてヒントを得ることができる
 
-```julia
+```repl
 julia> @doc hello("world")
 julia> @which hello("world")
 julia> @less hello("world")
@@ -547,11 +562,11 @@ julia> @less hello("world")
 
 Example.jl は簡単すぎるかもしれない？
 
-```console
+```repl
 julia> using TerminalClock; clock()
 ```
 
-- [JuliaPackaging/Preferences.jl](https://github.com/JuliaPackaging/Preferences.jl) によって時計の文字盤を制御することができる．
+- [JuliaPackaging/Preferences.jl](https://github.com/JuliaPackaging/Preferences.jl) によって時計の文字盤を制御することができる
 
 ```console
 $ julia -q
@@ -575,7 +590,7 @@ julia> using TerminalClock; clock()
 
 [KristofferC/OhMyREPL.jl](https://github.com/KristofferC/OhMyREPL.jl) を使うと直感的に探すことができる．
 
-```julia
+```repl
 julia> using OhMyREPL
 julia> 1 + 1 # シンタックスハイライトされる
 julia> # Ctrl-R で直感的な入力履歴を参照できる
@@ -607,9 +622,8 @@ class: middle, center
 
 ## Project.toml/Manifest.toml
 
-- 大抵のプログラムは何かしらのパッケージ(ライブラリ)に依存している．
-  - 与えられたプログラムを動かす際に何をインストールすればいいかを知っておく必要がある(依存関係の解決)．
-  - それらを管理する必要がある．
+- 大抵のプログラムは何かしらのパッケージ(ライブラリ)に依存
+  - ユーザは何をインストールすればいいかを知りたい
 - `Project.toml` にて使用するパッケージを記述
   - `Manifest.toml` はより詳細な依存関係の情報を格納 (`Project.toml` から自動生成される)
 - `Pkg.activate("path/to/Project.toml")`
@@ -647,7 +661,7 @@ $ julia --project=@. -e 'using Pkg; Pkg.instantiate()'
 $ julia --project=@. table.jl 0
 ```
 
-`--project=@.` を指定するのは面倒なので環境変数を設定するファイル (`.bashrc` や `.zshrc`) のなかに 
+`--project=@.` を指定するのは面倒なので環境変数を設定するファイル (`.bashrc` や `.zshrc`) のなかに
 
 ```
 export JULIA_PROJECT=@.
@@ -670,7 +684,7 @@ JIT コンパイルが毎回走るので（人間にとって）効率が悪い�
 
 `mylib.jl` 内部に `main` 関数があるとする．
 
-```julia
+```repl
 julia> include("mylib.jl")
 julia> main()
 # 別のターミナルで作業して mylib.jl を編集
@@ -699,7 +713,8 @@ julia> main()
 
 `using Revise; includet("mylib.jl")` のようにセミコロン `;` で繋げて書くと１行でセットアップができるので作業効率が良い．
 
-- Python での `importlib.reload` のようなものと思えば良い．
+- VS Code にて `Alt-J Alt-O` にて REPL を開くと Revise がすでにロードされている
+  - `Alt-J Alt-W` でウォッチするとわかる
 
 ---
 
@@ -709,7 +724,7 @@ julia> main()
 - １行１行実行しその都度変数の状態を監視できる．
 - VS Code でもできるが REPL の上でもできる．
 
-```julia
+```repl
 julia> using Debugger
 julia> include("mylib.jl")
 julia> @enter main()
@@ -724,14 +739,14 @@ julia> @enter main()
 - 型不安定なコードや潜在的なエラーを検知ができる．
   - 開発のモチベーションは [aviatesk/grad-thesis](https://github.com/aviatesk/grad-thesis) などから知ることができる
   - 日本語で読むことができる
-- なんか Julia のライブラリ遅いなーって思ったら 型不安定なコードがあることを疑うと良い．
+- 遅いと感じたら型不安定なコードがあることを疑うと良い
 
 ---
 
 ## 型安定・型不安定の話 (1)
 - Julia は JIT コンパイル方式で動作をする
-  - Julia は関数の引数に渡された値の__型の情報__ を元にコンパイルをする．
-  - 入力の型から出力の型が決定できれば型安定な実装となり効率の良いコードを生成することができる．
+  - Julia は関数の引数に渡された値の__型の情報__ を元にコンパイルをする
+  - 入力の型から出力の型が決定できれば型安定な実装となり効率の良いコードを生成することができる
   - 入力される値によって出力の型が変わると型不安定になる. 速度が求められる箇所では__型安定なコードを書くのが必須__です.
 
 - 型安定なコードを書くように意識すると
@@ -757,7 +772,7 @@ julia> @enter main()
 
 ## 型安定・型不安定の話 (3)
 
-- `@code_xxx` 系のマクロで Julia がどのようにコードを理解しているか観測ができる．
+- `@code_xxx` 系のマクロで Julia がどのようにコードを理解しているか観測ができる
 - `@code_xxx` 系のマクロの説明は Stack Overflow での議論
 [`What is the difference between @code_native, @code_typed and @code_llvm in Julia?`](https://stackoverflow.com/questions/43453944/what-is-the-difference-between-code-native-code-typed-and-code-llvm-in-julia) の解説がわかりやすい．
 
@@ -768,13 +783,13 @@ julia> @enter main()
 
 `ReLU (rectified linear unit)` の例が典型的
 
-```julia
+```repl
 relu1(x) = x > 0 ? x : 0
 ```
 
 上記のコードは下記と等価
 
-```julia
+```repl
 function relu2(x)
   if x > 0
     return x
@@ -830,7 +845,7 @@ relu6(x::T) where {T<:Real} = x > 0 ? x : zero(T)
 
 Julia 内部では次のような実装になっている (`@less zero(1.0)` などで検証せよ):
 
-```julia
+```repl
 zero(x::Number) = oftype(x,0)
 oftype(x, y) = convert(typeof(x), y)
 zero(::Type{T}) where {T<:Number} = convert(T,0)
@@ -843,7 +858,7 @@ convert(::Type{T}, x::Number) where {T<:Number} = T(x)::T
 
 - `@code_llvm relu4(rand())` の結果
 
-```julia
+```repl
 ;  @ string:1 within `relu4`
 define double @julia_relu4_2276(double %0) #0 {
 top:
@@ -855,7 +870,7 @@ top:
 
 - `@code_llvm relu5(rand())` の結果
 
-```julia
+```repl
 ;  @ string:2 within `relu5`
 define double @julia_relu5_2278(double %0) #0 {
 top:
@@ -903,7 +918,7 @@ end
 
 ほんのちょっとの気遣いで 10 倍コードが速くなる・ちょっとした怠けで 10 倍遅くなる．
 
-```julia
+```repl
 julia> using BenchmarkTools
 julia> N = 100000;
 julia> @benchmark main1($N) # 型不安定
@@ -933,7 +948,7 @@ BenchmarkTools.Trial: 10000 samples with 1 evaluation.
 
 `code_warntype`, `JET.report_opt` などで検出する. 対応するマクロもある．
 
-```julia
+```repl
 using JET
 
 # 色々警告が出る．REPL だと警告は赤色で表示される
@@ -943,7 +958,7 @@ report_opt(main1, (Int,))
 @report_opt main1(10) # JET.report_opt(main1, (Base.typesof)(10))
 ```
 
-```julia
+```repl
 code_warntype(main3, (Int,))
 @code_warntype main3(10)
 report_opt(main3, (Int,))
@@ -962,7 +977,7 @@ report_opt(main3, (Int,))
 
 要するに
 
-- 構造体のフィールド 
+- 構造体のフィールド
   - パフォーマンスの観点からは (`Vector{Real}` ではなく `Vector{Float64}` とするのが良い)
 - 配列をはじめとするデータ構造に関しての要素型
 
@@ -972,7 +987,7 @@ report_opt(main3, (Int,))
 
 アフィン変換 $f(x) = Wx + b$ を考える
 
-```julia
+```repl
 julia> struct Affine
          W
          b
@@ -995,9 +1010,9 @@ julia> aff(x)
 
 # 構造体: アフィン変換の例 (2)
 
-人間のからすると `W` は行列, `b` はベクトルということはわかるが，
+人間のからすると `W` は行列, `b` はベクトルということはわかるが， Julia 側からはわからない:
 
-```julia
+```repl
 julia> # 前のスライドからの続き
 julia> typeof(aff)
 Affine # フィールドの型情報が見えない
@@ -1023,10 +1038,10 @@ Body::Any
 
 # 構造体: アフィン変換の例 (3)
 
-- フィールドに型をつければいいんでしょ？ 
+- フィールドに型をつければいいんでしょ？
 - 一旦 REPL を再起動して下記を動かす
 
-```julia
+```repl
 julia> struct Affine
            W::Matrix{Float64}
            b::Vector{Float64}
@@ -1051,7 +1066,7 @@ julia> aff(rand(2))
 
 良さそうにみえる
 
-```julia
+```repl
 julia> @code_warntype aff(rand(2))
 MethodInstance for (::Affine)(::Vector{Float64})
   from (aff::Affine)(x) @ Main REPL[2]:1
@@ -1070,9 +1085,9 @@ Body::Vector{Float64}
 
 # 構造体: アフィン変換の例 (5)
 
-ところが，次の使い方をするユーザには適用できない 😭
+次の使い方をするユーザには適用できない 😭
 
-```julia
+```repl
 julia> struct Affine
            W::Matrix{Float64}
            b::Vector{Float64}
@@ -1087,16 +1102,16 @@ julia> Matrix{Float64} (alias for Array{Float64, 2}) # GPU のリソース使い
 julia> W = OffsetArray(rand(2,2), 0:1, 0:1)
 ```
 
-アフィン変換は汎用性が高いので多くの場面で"いい感じに"振る舞ってほしい
+アフィン変換は汎用性が高いので多くの場面で"いい感じに"振る舞ってほしい!
 
 ---
 
 
 # 構造体: アフィン変換の例 (6)
 
-次のようにしてパラメトリック構造体([Parametric Composite Types](https://docs.julialang.org/en/v1/manual/types/#man-parametric-composite-types)) によって定義する
+次のようにしてパラメトリック構造体([Parametric Composite Types](https://docs.julialang.org/en/v1/manual/types/#man-parametric-composite-types)) によって定義する:
 
-```julia
+```repl
 julia> struct Affine{T1, T2}
            W::T1
            b::T2
@@ -1122,9 +1137,9 @@ Body::Vector{Float32}
 
 # 構造体: アフィン変換の例 (7)
 
-今回のように 2x2, 3x3 程度の小規模の行列では配列のサイズ情報も含めて最適なコードを生成する StaticArrays.jl を用いた方法を採用すると良い
+今回のように 2x2, 3x3 程度の小規模の行列では配列のサイズ情報も含めて最適なコードを生成する StaticArrays.jl を用いた方法を採用すると良い．
 
-```julia
+```repl
 julia> using StaticArrays
 julia> struct Affine{T1, T2}
            W::T1
@@ -1149,9 +1164,9 @@ julia> aff(x)
 
 ## 寄り道 (StaticArrays.jl による計算の様子)
 
-人間が直接 `W[1,1] * x[1] + W[1,2] * x[2]` のように書き下したのとほぼ同じことをしていることがわかる．
+人間が直接 `W[1,1] * x[1] + W[1,2] * x[2]` のように書き下したのとほぼ同じことをしていることがわかる:
 
-```julia
+```repl
 julia> # 前のページの続き
 julia> @code_typed aff(x)
 CodeInfo(
@@ -1176,7 +1191,7 @@ CodeInfo(
 
 ## 寄り道 (ConcreteStructs.jl でサボる)
 
-```julia
+```repl
 julia> struct Affine{T1, T2}
            W::T1
            b::T2
@@ -1185,14 +1200,14 @@ julia> struct Affine{T1, T2}
 
 における `T1`, `T2` は形式的につけるものであって実装の部分としては本質的でない．実装時に人間が意識したくない．
 
-```julia
+```repl
 julia> using ConcreteStructs # @concrete マクロを提供する
 julia> @macroexpand @concrete struct Affine; W; b; end
 ```
 
 下記のコードと等価
 
-```julia
+```repl
 struct Affine{__T_W, __T_b} <: Any
       W::__T_W
       b::__T_b
@@ -1208,7 +1223,7 @@ struct Affine{__T_W, __T_b} <: Any
 
 型を意識しなくて済む.
 
-```julia
+```repl
 julia> using ConcreteStructs; @concrete struct Affine; W; b; end
 
 julia> using StaticArrays
@@ -1230,7 +1245,7 @@ Affine{SMatrix{2, 2, Float64, 4}, SVector{2, Float64}}([0.21089312982809838 0.40
 
 # JET.jl を用いた潜在的なエラーの発見 (1)
 
-```julia
+```repl
 """
     sumevens(N::Integer)
 
@@ -1248,7 +1263,7 @@ function sumevens(N::Integer)
 end
 ```
 
-```julia
+```repl
 julia> @assert sumevens(8) == 2 + 4 + 6 + 8 == 20
 ```
 
@@ -1256,17 +1271,17 @@ julia> @assert sumevens(8) == 2 + 4 + 6 + 8 == 20
 
 # JET.jl を用いた潜在的なエラーの発見 (2)
 
-```julia
+```repl
 julia> sumevens(1) # おっとっと？
 ERROR: MethodError: no method matching zero(::Type{Any})
 ```
 
 - `N = 1` の時は `arr = []` の次にあるループは実質何もしない. 一番最後で `sum([])` を実行することになる．
-- `[]` は `Vector{Any}` を型とする要素数が 0 の配列.
-  - `Vector{Any}` は任意の値が格納できる. 任意の型に対するゼロ元を定義するのができないので Julia ではエラーを返す．
-  - `no method matching zero(::Type{Any})` が出るのはこのため．
+- `[]` は `Vector{Any}` を型とする要素数が 0 の配列
+  - `Vector{Any}` は任意の値が格納できる. 任意の型に対するゼロ元を定義するのができないので Julia ではエラーを返す
+  - `no method matching zero(::Type{Any})` が出るのはこのため
 
-```julia
+```repl
 # sum(arr) は大雑把にいえば下記のようなことをする
 
 s = <初期値> # これをどう定義するか？
@@ -1281,7 +1296,7 @@ end
 
 JET.jl は `sumevens(1)` を実行しなくてもまずい部分を検出してくれる．
 
-```julia
+```repl
 julia> using JET; report_call(sumevens, (Int,))
 ═════ 1 possible error found ═════
 ┌ sumevens(N::Int64) @ Main ./REPL[1]:13
@@ -1312,9 +1327,9 @@ julia> using JET; report_call(sumevens, (Int,))
 
 # JET.jl を用いた潜在的なエラーの発見 (4)
 
-処方箋は次のとおり．`arr = Int[]` とすればよい．
+処方箋は次のとおり．`arr = Int[]` とすればよい:
 
-```julia
+```repl
 function sumevens(N::Integer)
     N ≥ 1 || throw(DomainError(N, "`N` cannot be less than 1."))
     arr = Int[] # この行を修正した
@@ -1327,7 +1342,7 @@ function sumevens(N::Integer)
 end
 ```
 
-```julia
+```repl
 # sum(arr) は大雑把にいえば下記のようなことをする
 
 s = 0 # Int 型のゼロ元
@@ -1358,7 +1373,7 @@ end
 
 # Cthulhu.jl
 
-- クトゥルフ と発音するらしい．
+- クトゥルフ と発音するらしい
 - ローカル変数がどのような型になっているかを観察できる
 - 誤解を恐れずに言えば Debugger.jl の型バージョン
 
@@ -1370,7 +1385,7 @@ end
 
 ベンチマークをとることができる
 
-```julia
+```repl
 julia> @benchmark main1($N) # 型不安定な実装
 BenchmarkTools.Trial: 1410 samples with 1 evaluation.
  Range (min … max):  3.257 ms …   6.721 ms  ┊ GC (min … max): 0.00% … 39.38%
@@ -1395,8 +1410,8 @@ BenchmarkTools.Trial: 10000 samples with 1 evaluation.
 
 # Profile.jl/ProfileView.jl/ProfileSVG.jl
 
-- どの関数がどれくらい呼び出されているか，どれくらい時間がかかっているか，どの部分が怪しい（型不安定な実装になっているか）を調べることができる．
-- 先ほどの Cthulhu.jl と連携することもできる．
+- どの部分が時間がかかっているかを調べることができる．
+- 先ほどの Cthulhu.jl と連携することもできる
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/pvduxLowpPY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -1421,11 +1436,11 @@ class: middle, center
 - Julia が動作するノートブック
   - ソースコード: https://github.com/fonsp/Pluto.jl
   - 使い方: https://github.com/fonsp/Pluto.jl/wiki
-- ユーザが書いたコードが更新されるとセル間の依存関係を自動で解決する．
-- パッケージの依存関係が一つのファイル内に記録される．
-  - 動作の再現がしやすい．他者と共有しやすい．
-- PlutoUI.jl と連携し簡易 UI を構築することができる．
-- 頑張ると [Introduction to Computational Thinking](https://computationalthinking.mit.edu/Spring21/) のようなリッチな教育資源を構築することができる．
+- ユーザが書いたコードが更新されるとセル間の依存関係を自動で解決
+- パッケージの依存関係が一つのファイル内に記録される
+  - 動作の再現がしやすい(=他者と共有しやすい)
+- PlutoUI.jl と連携し簡易 UI を構築することができる
+- 頑張ると [Introduction to Computational Thinking](https://computationalthinking.mit.edu/Spring21/) のようなリッチな教育資源を構築することができる
 
 ---
 
@@ -1470,7 +1485,7 @@ $ docker run --rm -it -v $PWD:/work -w /work \
 
 ローカルにある自作パッケージを Pluto で動かす場合
 
-- `julia --project=@. -e 'using Pluto; Pluto.run()'` で当該パッケージをアクティベートした状態で Pluto を起動.
+- `julia --project=@. -e 'using Pluto; Pluto.run()'` で Pluto を起動
 - 下記のセルを追加
 
 ```julia
@@ -1480,7 +1495,7 @@ end
 ```
 
 - [terasakisatoshi/Sacabambaspis.jl](https://github.com/terasakisatoshi/Sacabambaspis.jl)
-- 詳しいことは [Pluto's built-in package management](https://github.com/fonsp/Pluto.jl/wiki/%F0%9F%8E%81-Package-management) を読むと良い.
+- 詳しいことは [Pluto's built-in package management](https://github.com/fonsp/Pluto.jl/wiki/%F0%9F%8E%81-Package-management) を読むと良い
 
 ---
 
@@ -1502,7 +1517,7 @@ end
 
 # VS Code (2)
 
-VS Code 1.80.0 から VS Code の統合ターミナル上で画像を表示できるようになった．
+VS Code 1.80.0 から VS Code の統合ターミナル上で画像を表示できるようになった:
 
 ```julia
 using ImageInTerminal
