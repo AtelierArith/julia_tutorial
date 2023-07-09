@@ -22,8 +22,9 @@ $ tree -d
 ユーザは各ディレクトリに移動して `julia script.jl` を実行することを期待します。例えば `01_versioninfo` を試すためには次のようにします。
 
 ```console
+$ julia --project -e 'using Pkg; Pkg.instantiate()' # 初回だけ
 $ cd 01_versioninfo
-$ julia script.jl
+$ julia --project script.jl
 ```
 
 # 制限事項
