@@ -741,7 +741,6 @@ julia> @enter main()
 - 型不安定なコードや潜在的なエラーを検知ができる．
   - 開発のモチベーションは [aviatesk/grad-thesis](https://github.com/aviatesk/grad-thesis) などから知ることができる
   - 日本語で読むことができる
-- 遅いと感じたら型不安定なコードがあることを疑うと良い
 
 ---
 
