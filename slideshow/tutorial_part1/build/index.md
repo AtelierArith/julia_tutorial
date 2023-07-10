@@ -37,7 +37,7 @@ Satoshi Terasaki (AtelierArith)
 
 
 ```
-更新日: 2023-07-09T22:59:15.499
+更新日: 2023-07-10T03:59:43.607
 ```
 
 
@@ -1156,7 +1156,6 @@ julia> @enter main()
 
       * 開発のモチベーションは [aviatesk/grad-thesis](https://github.com/aviatesk/grad-thesis) などから知ることができる
       * 日本語で読むことができる
-  * 遅いと感じたら型不安定なコードがあることを疑うと良い
 
 
 ---
